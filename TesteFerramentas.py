@@ -1,9 +1,10 @@
 import mysql.connector
 from mysql.connector import Error
 
+# Utilizar senha do seu banco de dados mySQL
 
 class MontadoraDAO:
-   def __init__(self, host = 'localhost', database = 'db_auto', user = 'root', password = 'ceub123456'):
+   def __init__(self, host = 'localhost', database = 'db_auto', user = 'root', password = 'ATalSenha'):
        self.host = host
        self.database = database
        self.user = user
