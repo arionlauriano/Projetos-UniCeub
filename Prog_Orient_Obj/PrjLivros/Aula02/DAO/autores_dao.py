@@ -65,15 +65,34 @@ class autoresDAO:
             return lista_autores
         except mysql.connector.Error as err:
             print(f"Erro ao selecionar autores: {err}")
+    
+    # Vai fazer o UPDATE de um dos autores previamente registrados
+    def atualizar(self, autores):
+        if not self.conexao:
+            print("Erro: Nenhuma conexão com a database.")
+            return
+        
+        sql = "UPDATE autores SET nome_autor = %s WHERE cod_autor = %s"
+        valores = [autores.nome_autor, autores.cod_autor]
+
+        try:
+            self.cursor.execute(sql,valores)
+            self.conexao.commit()
+            print(f"Autor de código {autores.cod_autor} atualizado.")
+        except mysql.connector.Error as err:
+            print(f"Erro ao atualizar montadora: {err}")
+            self.conexao.rollback()
 
 
+# Chamado das funções
 if __name__ == "__main__":
     #roda a função autoresDAO() estabelecendo conexão
     dao = autoresDAO()
 
     if dao.conexao:
         # Caso a conexão exista, cria objetos Autores
-        autor1= autores("J.K.Rowling")
+        autor1= autores("Philip Pullman")
+        autor2= autores("J.K.Rowling")
 
         # Usa a função inserir()
         dao.inserir(autor1)
@@ -83,3 +102,13 @@ if __name__ == "__main__":
         todos_autores = dao.selecionar_tudo()
         for autor in todos_autores:
             print(autor)
+
+        # Usa a função atualizar()
+        if autor1.cod_autor:
+        # Busca o código do autor1
+            print(f"\nAtualizando o autor de ID {autor1.cod_autor}...")
+            autor1.nome_autor = "Ken Foulett"
+            # Atualiza o nome_autor do objeto autor1
+            dao.atualizar(autor1)
+            # Chama a função para atualizar o objeto autor1
+
