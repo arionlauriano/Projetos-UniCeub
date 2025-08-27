@@ -34,25 +34,52 @@ class autoresDAO:
             print("Erro: não há conexão com a database.")
             return # Encerra o processamento da função "inserir()"
     
-    sql = "INSERT INTO autores (nome_autores) VALUES (%s)"
-    valores = (autores.nome_autor)
-    # Try faz teste e caso não haja erro o except é ignorado
-    try:
-        self.cursor.execute(sql, valores)
-        self.cursor.commit()
-        print(f"Autor '{autor.nome_autor}' foi inserido.")
-        autor.cod_autor = self.curoso.lastrowid
-    except mysql.connecotr.Error as err:
-        print(f"Erro ao inserir montadora; {err}")
-        self.conexao.rollback()
+        sql = "INSERT INTO autores (nome_autor) VALUES (%s)"
+        valores = [autores.nome_autor]
+        # Try faz teste e caso não haja erro o except é ignorado
+        try:
+            self.cursor.execute(sql, valores)
+            self.conexao.commit()
+            print(f"Autor '{autores.nome_autor}' foi inserido.")
+            autores.cod_autor = self.cursor.lastrowid
+        except mysql.connector.Error as err:
+            print(f"Erro ao inserir Autor; {err}")
+            self.conexao.rollback()
+
+    def selecionar_tudo(self):
+        #Vai dar o "SELECT * FROM autores;"
+        if not self.conexao:
+            print("Erro: Nenhuma conexão com a database.")
+            return
+        sql = "SELECT * FROM autores"
+
+        try:
+            self.cursor.execute(sql)
+            resultados = self.cursor.fetchall()
+
+            lista_autores = []
+            for row in resultados:
+                Autores = autores(cod_autor=row[0], nome_autor=row[1])
+                lista_autores.append(Autores)
+
+            return lista_autores
+        except mysql.connector.Error as err:
+            print(f"Erro ao selecionar autores: {err}")
 
 
 if __name__ == "__main__":
     #roda a função autoresDAO() estabelecendo conexão
     dao = autoresDAO()
 
-    # Caso a conexão exista, cria objetos Autores
-    autor1= autores("J.K. Rouling")
+    if dao.conexao:
+        # Caso a conexão exista, cria objetos Autores
+        autor1= autores("J.K.Rowling")
 
-    # Usa a função inserir()
-    dao.inserir(autor1)
+        # Usa a função inserir()
+        dao.inserir(autor1)
+
+        # Usa o DAO para fazer o "SELECT * FROM autroes;"
+        print("\nAutores cadastrados:")
+        todos_autores = dao.selecionar_tudo()
+        for autor in todos_autores:
+            print(autor)
