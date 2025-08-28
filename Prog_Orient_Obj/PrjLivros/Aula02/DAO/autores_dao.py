@@ -83,6 +83,21 @@ class autoresDAO:
             print(f"Erro ao atualizar montadora: {err}")
             self.conexao.rollback()
 
+    def deletar(self, autores):
+        if not self.conexao:
+            print("Erro: sem conexão com a database.")
+            return
+        
+        sql = "DELETE FROM autores WHERE cod_autor=%s"
+
+        try:
+            self.cursor.execute(sql,[autores.cod_autor])
+            self.conexao.commit()
+            print(f"Autor de código {autores.cod_autor} deletado.")
+        except mysql.connector.Error as err:
+            print(f"Erro ao deletar autor:{err}")
+            self.conexao.rollback()
+
 
 # Chamado das funções
 if __name__ == "__main__":
@@ -96,6 +111,7 @@ if __name__ == "__main__":
 
         # Usa a função inserir()
         dao.inserir(autor1)
+        dao.inserir(autor2)
 
         # Usa o DAO para fazer o "SELECT * FROM autroes;"
         print("\nAutores cadastrados:")
@@ -111,4 +127,15 @@ if __name__ == "__main__":
             # Atualiza o nome_autor do objeto autor1
             dao.atualizar(autor1)
             # Chama a função para atualizar o objeto autor1
+        
+        # Busca o id do autor2:
+        if autor2.cod_autor:
+            print(f"\nDeletando autor de código {autor2.cod_autor}")
+            # Chama a função deletar() para o autor2
+            dao.deletar(autor2)
+
+        print("\n Atuores cadastrados:")
+        todos_autores = dao.selecionar_tudo()
+        for autor in todos_autores:
+            print(autor)
 
