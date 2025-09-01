@@ -68,7 +68,7 @@ class AutoresDAO:
             if resultado is None:
                 return None
             else:
-                autor=Autores[cod_autor=resultado[0], nome_autor=resultado[1]]
+                autor=Autores[cod_autor==resultado[0], nome_autor==resultado[1]]
                 return autor
         except mysql.connector.Error as err:
             return None
