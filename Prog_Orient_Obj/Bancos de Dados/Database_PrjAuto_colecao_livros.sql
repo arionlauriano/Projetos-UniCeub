@@ -37,8 +37,6 @@ INSERT INTO livros_adiquiridos (nome_livro, id_autor, id_editora) VALUES
     ("A Droga da Amizade", 5, 5);
 
 SELECT * FROM autores;
-    
-SELECT * FROM editoras;
 
 DROP TABLE livros_adiquiridos;
 DROP TABLE autores;

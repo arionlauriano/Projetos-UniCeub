@@ -68,11 +68,7 @@ class AutoresDAO:
             if resultado is None:
                 return None
             else:
-<<<<<<< HEAD
                 autor=Autores(cod_autor=resultado[0], nome_autor=resultado[1])
-=======
-                autor=Autores[cod_autor==resultado[0], nome_autor==resultado[1]]
->>>>>>> ebae215704a7b91bcc0f1cce2f9f0bb6e034bcfe
                 return autor
         except mysql.connector.Error as err:
             return None
@@ -133,8 +129,3 @@ if __name__ == "__main__":
         print("\nLista Atualizada:")
         for autor in dao.select_alfabetico():
             print(autor)
-
-
-
-
-        
