@@ -3,17 +3,6 @@ DROP DATABASE colecao_livros;
 CREATE DATABASE colecao_livros;
 
 USE colecao_livros;
-
-CREATE TABLE editoras(
-	cod_editora INT AUTO_INCREMENT PRIMARY KEY,
-    nome_editora VARCHAR(50));
-    
-INSERT INTO editoras (nome_editora) VALUES
-	("Rocco"),
-    ("Altaya"),
-    ("Oni Press"),
-    ("Universo do Livro"),
-    ("Moderna");
     
 CREATE TABLE autores(
 	cod_autor INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,9 +19,7 @@ CREATE TABLE livros_adiquiridos(
 	cod_livro INT AUTO_INCREMENT PRIMARY KEY,
     nome_livro VARCHAR(50),
     id_autor INT NOT NULL,
-    id_editora INT NOT NULL, 
     CONSTRAINT fk_autor_livro FOREIGN KEY (id_autor) REFERENCES autores(cod_autor),
-    CONSTRAINT fk_editora_livro FOREIGN KEY (id_editora) REFERENCES editoras(cod_editora));
 
 INSERT INTO livros_adiquiridos (nome_livro, id_autor, id_editora) VALUES
 	("Cantiga de Pássaros e Serpentes", 1, 1),
