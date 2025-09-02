@@ -1,12 +1,63 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Coleção de Livros</title>
+    
+    <style>
+        body {
+            background-color: rgb(199, 206, 151);
+            color: rgb(40, 40, 0);
+        }
+        h1 {
+            font-family: 'Georgia';
+            font-size: 30px;
+        }
+        h2 {
+            font-family: 'Georgia';
+            font-size: 25px;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            font-family: 'Lucida Sans';
+            font-weight: 900;
+            left: 0px;            
+        }
+        a {
+            text-decoration: none;
+            color: rgb(250, 255, 219);
+
+            display: inline-block;
+            background-color: rgb(40, 40, 0);
+            padding: 10px 10px;
+            border-radius: 10px;
+            margin: 3px;
+
+            transition: 0.5s;
+        } 
+        a:hover {
+            background-color: rgb(90, 90, 0);
+        }
+    </style>
 </head>
 
 <body>
     <h1>Menu Principal</h1>
-    <ul>
-        <li><a href=""></a></li>
-    </ul>
+    <h2>CRUD Autores</h2>
+        <ul>
+            <li><a href="">Adicionar Autor</a></li>
+            <li><a href="">Visualizar Autores</a></li>
+            <li><a href="">Editar Autores</a></li>
+            <li><a href="">Deletar Autores</a></li>
+        </ul>
+    <h2>CRUD Livros</h2>
+        <ul>
+            <li><a href="">Adicionar Livros</a></li>
+            <li><a href="">Visualizar Livros</a></li>
+            <li><a href="">Editar Livros</a></li>
+            <li><a href="">Deletar Livros</a></li>
+        </ul>
 </body>
+</html>
