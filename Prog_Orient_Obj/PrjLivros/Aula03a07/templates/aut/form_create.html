@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt=br">
+<head>
+
+</head>
+
+<body>
+    <h1>Novo Autor</h1>
+    <form action="/aut/create" method="post">
+        <label for="nome">Nome:</label><br>
+            <input type="text" name="nome_autor" id=""><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <div style="display: {{display}};">{{ msg }}</div>
+    <hr>
+    <a href="/">[ Voltar ao Menu ]</a>
+</body>
+</html>

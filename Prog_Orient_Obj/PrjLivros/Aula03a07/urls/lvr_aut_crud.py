@@ -1,10 +1,12 @@
 from flask import Flask, render_template
+from urls.Aut_crud import bp_aut
 
 app = Flask(__name__)
+app.registrer_blueprint(bp_aut, url_prefix="/")
 
 @app.route('/')
 def index():
    return render_template('index_colec_livr.html')
 
 if __name__ == '__main__':
-   app.run(debug=True, port=80)S
+   app.run(debug=True, port=80)
