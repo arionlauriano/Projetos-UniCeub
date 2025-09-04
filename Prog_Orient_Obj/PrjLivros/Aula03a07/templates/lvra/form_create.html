@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Formulário de Modelos</title>
+   <style>
+       /* Estilos aplicados diretamente aos campos de entrada */
+       input[type="text"], select {
+           width: 400px;
+           padding: 8px;
+           margin-bottom: 15px;
+           border: 2px solid #c0c0c0;
+           border-radius: 10px;
+           font-size: 1em;
+       }
+
+
+       /* Estilos aplicados ao botão */
+       button {
+           padding: 10px 20px;
+           background-color: #007bff;
+           color: white;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
+
+
+       button:hover {
+           background-color: #0056b3;
+       }
+       div{
+           margin: 20px;
+           padding: 10px 10px;
+           background-color: #ddaaaa;
+           border: 2px solid red;
+           width: 350px;
+           font-size: 1em;
+       }
+   </style>
+
+</head>
+<body>
+    
+    <h1>Novo Livro Ad</h1>
+
+    <form action="/lvra/create" method="post">
+        <label for="nome">Nome do Livro:</label><br>
+            <input type="text" id="nome" name="nome_livro" required>
+        <br><br>
+        <label for="autor">Autor do Livro:</label><br>
+        <select name="nome_autor" id="autor">
+            {% for m in lst %}
+                <option value="{{la.id_autor}}">{{la.nome_autor}}</option>
+                {% endfor %}
+        </select>
+        <br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <div style="display: {{display}};">{{ msg }}</div>
+    <hr>
+    [<a href="/">Voltar ao Menu</a>]
+
+</body>
+</html>
