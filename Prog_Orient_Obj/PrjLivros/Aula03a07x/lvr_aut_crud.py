@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from urls.Aut_crud import bp_aut
 
 app = Flask(__name__)
-app.registrer_blueprint(bp_aut, url_prefix="/aut")
+app.register_blueprint(bp_aut, url_prefix="/aut")
 
 @app.route('/')
 def index():

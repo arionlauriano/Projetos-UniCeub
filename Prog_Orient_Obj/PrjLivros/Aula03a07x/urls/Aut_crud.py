@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request
-from Aula03a07.dao.Autores_dao import Autores, AutoresDAO
+from dao.Autores_dao import Autores, AutoresDAO
 
 bp_aut = Blueprint("aut", __name__)
 
 @bp_aut.route("/form_create")
 def form_create():
-    return render_template("/aut/form_crate.html", msg="", display="none")
+    return render_template("aut/form_create.html", msg="", display="none")
 
 @bp_aut.route("/create", methods=["POST"])
 def create():
@@ -18,4 +18,4 @@ def create():
         msg = "Erro ao inserir autor."
     else:
         msg = f"Autor número {a.cod_autor} inserido."
-    return render_template("/aut/form_crate.html", msg=msg, display="block")
+    return render_template("/aut/form_create.html", msg=msg, display="block")
