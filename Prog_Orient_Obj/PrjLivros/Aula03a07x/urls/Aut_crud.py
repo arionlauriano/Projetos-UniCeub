@@ -19,3 +19,14 @@ def create():
     else:
         msg = f"Autor número {a.cod_autor} inserido."
     return render_template("/aut/form_create.html", msg=msg, display="block")
+
+
+@bp_aut.route("/read")
+def read():
+    aut_dao = AutoresDAO()
+    lst = aut_dao.select_alfabetico()
+    if not lst:
+       msg = "Não há autores na database."
+    else:
+       msg = f"{len(lst)} autores listados na database."
+    return render_template("/aut/read.html")
