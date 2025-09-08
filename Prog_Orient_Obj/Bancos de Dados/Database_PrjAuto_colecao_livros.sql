@@ -19,22 +19,22 @@ CREATE TABLE livros_adiquiridos(
 	cod_livro INT AUTO_INCREMENT PRIMARY KEY,
     nome_livro VARCHAR(50),
     id_autor INT NOT NULL,
-    CONSTRAINT fk_autor_livro FOREIGN KEY (id_autor) REFERENCES autores(cod_autor),
+    CONSTRAINT fk_autor_livro FOREIGN KEY (id_autor) REFERENCES autores(cod_autor));
 
-INSERT INTO livros_adiquiridos (nome_livro, id_autor, id_editora) VALUES
-	("Cantiga de Pássaros e Serpentes", 1, 1),
-    ("Amanhecer na Colheita", 1, 1),
-    ("Jogos Vorazes", 1, 1),
-    ("Em Chamas", 1, 1),
-    ("Esperança", 1, 1),
-    ("Eragon", 2, 1),
-    ("Thorn", 2, 1),
-    ("Brisingir", 2, 1),
-    ("Eldest", 2, 1),
-    ("Herança", 2, 1),
-    ("Murtagh", 2, 1),
-    ("The Tea Dragon Society", 4, 3),
-    ("A Droga da Amizade", 5, 5);
+INSERT INTO livros_adiquiridos (nome_livro, id_autor) VALUES
+    ("Cantiga de Pássaros e Serpentes", 1),
+    ("Amanhecer na Colheita", 1),
+    ("Jogos Vorazes", 1),
+    ("Em Chamas", 1),
+    ("Esperança", 1),
+    ("Eragon", 2),
+    ("Thorn", 2),
+    ("Brisingir", 2),
+    ("Eldest", 2),
+    ("Herança", 2),
+    ("Murtagh", 2),
+    ("The Tea Dragon Society", 4),
+    ("A Droga da Amizade", 5);
 
 SELECT * FROM autores;
 

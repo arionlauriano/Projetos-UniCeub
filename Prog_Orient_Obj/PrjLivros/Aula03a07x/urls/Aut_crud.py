@@ -29,4 +29,4 @@ def read():
        msg = "Não há autores na database."
     else:
        msg = f"{len(lst)} autores listados na database."
-    return render_template("/aut/read.html")
+    return render_template("/aut/read.html", msg=msg, lst=lst,)

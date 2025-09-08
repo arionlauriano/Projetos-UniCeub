@@ -26,7 +26,7 @@ class Livros_AdDAO:
         if not Livros_AdDAO.conexao:
             print("Sem conexão com a database.")
             return
-        sql = "SELECT * FROM livros_adiquiridos"
+        sql = "SELECT * FROM livros_adiquiridos ORDER BY id_autor"
         lista_livrosAd = []
         try:
             self.cursor.execute(sql)

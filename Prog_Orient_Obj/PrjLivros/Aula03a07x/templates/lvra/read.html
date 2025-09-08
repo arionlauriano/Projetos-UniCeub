@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Listagem de Montadoras</title>
+   <title>Listagem de Livros</title>
    <!-- Estilos CSS para a tabela -->
    <style>
        body {
@@ -28,20 +28,21 @@
    </style>
 </head>
 <body>
-   <h1>Listagem de Autores</h1>
+   <h1>Listagem de Livros</h1>
    <table>
        <thead>
            <tr>
                <th>Identificador</th>
-
-               <th>Nome da Autor</th>
+               <th>Montadora</th>
+               <th>Nome do Modelo</th>
            </tr>
        </thead>
        <tbody>
-           {% for a in lst %}
+           {% for la in lst %}
            <tr>
-               <td>{{ a.cod_autor }}</td>
-               <td>{{ a.nome_autor }}</td>
+               <td>{{ la.cod_livro }}</td>
+               <td>{{ la.nome_livro }}</td>
+               <td>{{ la.nome_autor }}</td>
            </tr>
            {% endfor %}
        </tbody>
