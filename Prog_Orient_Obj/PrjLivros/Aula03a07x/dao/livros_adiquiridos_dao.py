@@ -3,13 +3,14 @@ import mysql.connector
 from Autores_dao import AutoresDAO
 
 class Livros_Ad:
-    def __init__(self, cod_livro=None, nome_livro="", id_autor=None):
+    def __init__(self, cod_livro=None, nome_livro="", id_autor=None, autor=None):
         self.cod_livro=cod_livro
         self.nome_livro=nome_livro
         self.id_autor=id_autor
+        self.autor = autor
 
     def __str__(self):
-        return f"Id Livro: {self.cod_livro} Nome Livro {self.nome_livro} Id Autor: {self.id_autor} Id Editora: {self.id_editora}"
+        return f"Id Livro: {self.cod_livro} Nome Livro {self.nome_livro} Id Autor: {self.id_autor}"
 
 class Livros_AdDAO:
     def __init__(self, host="localhost", user="root", password="Senha#", database="colecao_livros"):
@@ -22,19 +23,21 @@ class Livros_AdDAO:
         self.cursor = self.conexao.cursor()
         print("Conexão com a database estabelecida.")
 
-    def selecionar(self, Livros_Ad):
-        if not Livros_AdDAO.conexao:
+    def selecionar(self):
+        if not self.conexao:
             print("Sem conexão com a database.")
             return
-        sql = "SELECT * FROM livros_adiquiridos ORDER BY id_autor"
-        lista_livrosAd = []
+        sql = "SELECT * FROM livros_adiquiridos ORDER BY nome_livro"
         try:
             self.cursor.execute(sql)
             todosLivrosAd = self.cursor.fetchall()
+            lst_livra = []
+            daoAutores = AutoresDAO()
             for row in todosLivrosAd:
-                livros = Livros_Ad(cod_livro=row[0], nome_livro=row[1], id_autor=row[3], id_editora=row[4])
-                lista_livrosAd.append(todosLivrosAd)
-                return lista_livrosAd
+                autor = daoAutores.consulta_por_id(row[2])
+                livros = Livros_Ad(cod_livro=row[0], nome_livro=row[1], id_autor=row[2], autor=autor)
+                lst_livra.append(livros)
+                return lst_livra
         except mysql.connector.Error as err:
             print("Erro ao consultar tabela.")
             return []
@@ -84,12 +87,6 @@ if __name__ == "__main__":
     dao = Livros_AdDAO()
 
     if dao.conexao:
-        livro1 = Livros_Ad(nome_livro="Droga da Obediência", id_autor="5")
-        livro2 = Livros_Ad(nome_livro="Anjo do Amor", id_autor="5")
-
-        dao.inserir_livros(livro1)
-        dao.inserir_livros(livro2)
-
-        if livro2.cod_livro:
-            livro2.nome_livro = "Anjo da Morte"
-            dao.atualizar_livros(livro2)
+        print("\nLivros Adquiridos:")
+        for livro in dao.selecionar():
+            print(livro)

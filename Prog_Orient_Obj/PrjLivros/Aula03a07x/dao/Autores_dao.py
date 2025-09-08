@@ -57,13 +57,13 @@ class AutoresDAO:
             print(f"Erro ao selecionar autores: {err}")
             return []
         
-    def consulta_por_id(self,cod):
+    def consulta_por_id(self, cod_autor):
         if not self.conexao:
             return None
         sql = "SELECT * FROM autores WHERE cod_autor=%s"
 
         try:
-            self.cursor.execute(sql, [cod])
+            self.cursor.execute(sql, [cod_autor])
             resultado = self.cursor.fetchone()
             if resultado is None:
                 return None
@@ -127,5 +127,4 @@ if __name__ == "__main__":
             dao.deletar(autor2.cod_autor)
 
         print("\nLista Atualizada:")
-        for autor in dao.select_alfabetico():
-            print(autor)
+        print(dao.consulta_por_id(1))

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from dao.livros_adiquiridos_dao import Livros_Ad, Livros_AdDAO
 from dao.Autores_dao import AutoresDAO
 
-bp_lvra = Blueprint("lrva", __name__)
+bp_lvra = Blueprint("lvra", __name__)
 
 @bp_lvra.route("/form_create")
 def form_create():
