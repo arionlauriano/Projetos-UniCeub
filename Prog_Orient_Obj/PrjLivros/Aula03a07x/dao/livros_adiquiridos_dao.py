@@ -10,7 +10,7 @@ class Livros_Ad:
         self.autor = autor
 
     def __str__(self):
-        return f"Id Livro: {self.cod_livro} Nome Livro {self.nome_livro} Id Autor: {self.id_autor}"
+        return f"| Id Livro: {self.cod_livro} | Nome Livro {self.nome_livro} | Id Autor: {self.id_autor} | Nome Autor: {self.autor}"
 
 class Livros_AdDAO:
     def __init__(self, host="localhost", user="root", password="Senha#", database="colecao_livros"):
@@ -35,12 +35,12 @@ class Livros_AdDAO:
             daoAutores = AutoresDAO()
             for row in todosLivrosAd:
                 autor = daoAutores.consulta_por_id(row[2])
-                livros = Livros_Ad(cod_livro=row[0], nome_livro=row[1], id_autor=row[2], autor=autor)
+                livros = Livros_Ad(cod_livro=row[0], nome_livro=row[1], id_autor=row[2], autor=autor.nome_autor)
                 lst_livra.append(livros)
-                return lst_livra
         except mysql.connector.Error as err:
             print("Erro ao consultar tabela.")
             return []
+        return lst_livra
         
     def inserir_livros(self, Livros_Ad):
         if not mysql.connector:
