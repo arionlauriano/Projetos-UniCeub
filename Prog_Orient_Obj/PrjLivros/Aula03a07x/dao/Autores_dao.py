@@ -90,7 +90,7 @@ class AutoresDAO:
 
     def deletar(self, cod_autor):
         if not self.conexao:
-            return
+            return False
         
         sql = "DELETE FROM autores WHERE cod_autor=%s"
 
@@ -98,9 +98,11 @@ class AutoresDAO:
             self.cursor.execute(sql, [cod_autor])
             self.conexao.commit()
             print(f"Autor de código {cod_autor} deletado.")
+            return True
         except mysql.connector.Error as err:
             print(f"Erro ao deletar autor de código {cod_autor}: {err}")
             self.conexao.rollback()
+        return False
 
 
 if __name__ == "__main__":

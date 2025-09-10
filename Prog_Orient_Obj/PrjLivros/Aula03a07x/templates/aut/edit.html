@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Listagem de Autores</title>
+   <style>
+       body {
+           font-family: sans-serif;
+           background-color: #f3f4f6;
+           padding: 20px;
+       }
+       table {
+           border-collapse: collapse;
+           background-color: #ffffff;
+           border: 1px solid #ddd;
+       }
+       th, td {
+           text-align: left;
+           padding: 12px;
+           border: 1px solid #ddd;
+       }
+       th {
+           background-color: #e2e2e2;
+           font-weight: bold;
+       }
+       .acao-btn {
+           padding: 8px 12px;
+           border: none;
+           border-radius: 10px;
+           cursor: pointer;
+           text-decoration: none;
+           color: white;
+           margin-right: 5px;
+       }
+       .btn-alterar {
+           background-color: #07aa07; /* Verde */
+       }
+       .btn-excluir {
+           background-color: #dc3545; /* Vermelho */
+       }
+   </style>
+</head>
+<body>
+   <h1>Listagem de Autores</h1>
+   <table>
+       <thead>
+           <tr>
+               <th>Identificador</th>
+               <th>Nome do Autor</th>
+               <th>Ações</th> </tr>
+       </thead>
+       <tbody>
+           {% for a in lst_aut %}
+           <tr>
+               <td>{{ a.cod_autor }}</td>
+               <td>{{ a.nome_autor }}</td>
+               <td>
+                   <a href="/aut/form_update/{{ a.cod_autor }}" class="acao-btn btn-alterar">Alterar</a>
+                   <a href="/aut/delete/{{ a.cod_autor }}" class="acao-btn btn-excluir"
+                      onclick="return confirm('Tem certeza que deseja excluir o autor, {{ a.nome_autor }}?');">Excluir</a>
+               </td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+   <h3>{{ msg }}</h3>
+   <hr>
+   [ <a href="/">Voltar ao Menu</a> ]
+</body>
+</html>

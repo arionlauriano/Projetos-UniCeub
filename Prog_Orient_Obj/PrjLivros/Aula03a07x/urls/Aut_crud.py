@@ -30,3 +30,27 @@ def read():
     else:
        msg = f"{len(lst)} autores listados na database."
     return render_template("/aut/read.html", msg=msg, lst=lst,)
+
+@bp_aut.route("/edit")
+def edit():
+    aut_dao = AutoresDAO()
+    lst_aut = aut_dao.select_alfabetico()
+    if not lst_aut:
+        msg = "Não há autores na database."
+    else:
+        msg = f"{len(lst_aut)} autores na database."
+    return render_template("/aut/edit.html", msg=msg, lst_aut=lst_aut)
+
+@bp_aut.route("/delete/<int:cod>")
+def delete(cod):
+    aut_dao = AutoresDAO()
+    if aut_dao.deletar(cod):
+        msg = "Autor excluido da database."
+    else:
+        msg = "Erro ao excluir autor. Confira se há livros associados."
+    lst_aut = aut_dao.select_alfabetico()
+    if not lst_aut:
+        msg += "| Não há autores na database."
+    else:
+        msg += f"| {len(lst_aut)} autores listados na database."
+    return render_template("/aut/edit.html", msg=msg, lst_aut=lst_aut)

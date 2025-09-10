@@ -1,6 +1,6 @@
 import mysql.connector
 
-from Autores_dao import AutoresDAO
+from dao.Autores_dao import AutoresDAO
 
 class Livros_Ad:
     def __init__(self, cod_livro=None, nome_livro="", id_autor=None, autor=None):
@@ -68,17 +68,20 @@ class Livros_AdDAO:
         except mysql.connector.Error as err: 
             return f"Erro ao atulaizar registro"
         
-    def deletar_livros(self, Livros_Ad):
+    def deletar_livros(self, cod_livro):
         if not mysql.connector:
             return "Sem conexão com a database."
+            
         sql = "DELETE FROM livros_adiquiridos WHERE cod_livros=%s"
-        valor = [Livros_Ad.cod_livros]
+
         try:
-            self.cursor.execute(sql, valor)
+            self.cursor.execute(sql, [cod_livro])
             self.conexao.commit()
-            print(f"Autor de código {valor} deletado.")
+            print(f"Autor de código {cod_livro} deletado.")
         except mysql.connector.Error as err:
-            return f"Erro ao deletar autor de código {valor}: {err}"
+            print(f"Erro ao deletar autor de código {cod_livro}: {err}")
+            self.conexao.rollback()
+            return False
 
 
 

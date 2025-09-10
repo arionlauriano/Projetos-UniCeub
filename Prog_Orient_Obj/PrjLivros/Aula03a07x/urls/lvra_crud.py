@@ -31,3 +31,29 @@ def read():
     else:
        msg = f"{len(lstLA)} livros listados na database."
     return render_template("/lvra/read.html", msg=msg, lstLA=lstLA)
+
+
+@bp_lvra.route("/edit")
+def edit():
+    la_dao = Livros_AdDAO()
+    lstLA = la_dao.selecionar()
+
+    if not lstLA:
+        msg = "Não há livros na database."
+    else:
+        msg = f"{len(lstLA)} livros registrados na database."
+    return render_template("/lvra/edit.html", lstLA=lstLA, msg=msg)
+
+@bp_lvra.route("/delete/<int:cod>")
+def delet(cod):
+    la_dao = Livros_AdDAO()
+    if la_dao.deletar_livros(cod):
+        msg = "Livro deletado da database."
+    else:
+        msg = "Erro ao deletar livro da database."
+    lstLA = la_dao.selecionar()
+    if not lstLA:
+        msg += " | Não há livros na database."
+    else:
+        msg += f" | {len(lstLA)} livros listados na database."
+    return render_template("/lvra/edit.html", lstLA=lstLA, msg=msg)
