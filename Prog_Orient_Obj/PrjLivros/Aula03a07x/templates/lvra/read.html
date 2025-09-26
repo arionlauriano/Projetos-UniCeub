@@ -33,16 +33,16 @@
        <thead>
            <tr>
                <th>Identificador</th>
-               <th>Montadora</th>
-               <th>Nome do Modelo</th>
+               <th>Nome Livro</th>
+               <th>Nome Autor</th>
            </tr>
        </thead>
        <tbody>
-           {% for la in lst %}
+           {% for la in lstLA %}
            <tr>
                <td>{{ la.cod_livro }}</td>
                <td>{{ la.nome_livro }}</td>
-               <td>{{ la.nome_autor }}</td>
+               <td>{{ la.autor }}</td>
            </tr>
            {% endfor %}
        </tbody>

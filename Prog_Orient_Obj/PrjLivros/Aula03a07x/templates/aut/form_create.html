@@ -3,10 +3,10 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Formulário de Autores</title>
+   <title>Formulário de Modelos</title>
    <style>
        /* Estilos aplicados diretamente aos campos de entrada */
-       input[type="text"] {
+       input[type="text"], select {
            width: 400px;
            padding: 8px;
            margin-bottom: 15px;
@@ -39,18 +39,22 @@
            font-size: 1em;
        }
    </style>
-</head>
 
+</head>
 <body>
+    
     <h1>Novo Autor</h1>
+
     <form action="/aut/create" method="post">
-        <label for="nome">Nome:</label><br>
-            <input type="text" name="nome_autor" id=""><br><br>
+        <label for="nome">Nome do Autor:</label><br>
+            <input type="text" id="nome" name="nome_autor" required>
+        <br><br>
 
         <button type="submit">Salvar</button>
     </form>
-    <div style="display: {{ display }};">{{ msg }}</div>
+    <div style="display: {{display}};">{{ msg }}</div>
     <hr>
-    <a href="/">[ Voltar ao Menu ]</a>
+    [<a href="/">Voltar ao Menu</a>]
+
 </body>
 </html>

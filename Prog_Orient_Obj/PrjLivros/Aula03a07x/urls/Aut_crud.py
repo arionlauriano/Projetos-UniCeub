@@ -54,3 +54,22 @@ def delete(cod):
     else:
         msg += f"| {len(lst_aut)} autores listados na database."
     return render_template("/aut/edit.html", msg=msg, lst_aut=lst_aut)
+
+@bp_aut.route("form_update/<int:idt>")
+def form_update(idt):
+    aut_dao = AutoresDAO()
+    autor = aut_dao.consulta_por_id(idt)
+    return render_template("aut/form_update.html", aut=autor, msg="", display="none")
+
+@bp_aut.route("/save_update", methods=["POST"])
+def save_update():
+    aut = Autores()
+    aut.cod_autor = request.form["cod_autor"]
+    aut.nome_autor = request.form["nome_autor"]
+    
+    aut_dao = AutoresDAO()
+    aut_dao.atualizar(aut)
+
+    msg = f"Autor, {aut.cod_autor} alterada com sucesso."
+
+    return render_template("/aut/form_update.html", aut=aut, msg=msg, display="block")
