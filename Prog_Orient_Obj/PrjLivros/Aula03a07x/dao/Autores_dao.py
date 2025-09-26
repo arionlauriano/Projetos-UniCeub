@@ -40,7 +40,7 @@ class AutoresDAO:
 
     def select_alfabetico(self):
         if not self.conexao:
-            print("10conectado")
+            print("Impossivel conectar com a database.")
             return []
         
         sql = "SELECT * FROM autores ORDER BY nome_autor"

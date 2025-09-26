@@ -6,7 +6,9 @@ bp_lvra = Blueprint("lvra", __name__)
 
 @bp_lvra.route("/form_create")
 def form_create():
-    return render_template("lvra/form_create.html", msg="", display="none")
+    aut_dao = AutoresDAO()
+    lstAut = aut_dao.select_alfabetico()
+    return render_template("lvra/form_create.html", msg="", display="none", lstAut="lstAut")
 
 @bp_lvra.route("/create", methods=["POST"])
 def create():
@@ -14,7 +16,7 @@ def create():
     la.nome_livro = request.form["nome_livro"]
     la.id_autor = request.form["id_autor"]
 
-    ladao= Livros_AdDAO
+    ladao= Livros_AdDAO()
     ladao.inserir_livros(la)
     if la.cod_livro is None:
         msg = "Erro ao inserir modelo."
