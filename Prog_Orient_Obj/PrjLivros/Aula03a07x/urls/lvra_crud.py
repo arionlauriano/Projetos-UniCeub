@@ -8,7 +8,7 @@ bp_lvra = Blueprint("lvra", __name__)
 def form_create():
     aut_dao = AutoresDAO()
     lstAut = aut_dao.select_alfabetico()
-    return render_template("lvra/form_create.html", msg="", display="none", lstAut="lstAut")
+    return render_template("lvra/form_create.html", msg="", display="none", lstAut=lstAut)
 
 @bp_lvra.route("/create", methods=["POST"])
 def create():
