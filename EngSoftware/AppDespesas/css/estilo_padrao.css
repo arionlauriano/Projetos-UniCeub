@@ -1,0 +1,13 @@
+body {
+    margin: 5px;
+    height: 480px;
+    width: 270px;
+    text-align: center;
+    background-color: rgb(40, 34, 34);
+}
+div {
+    background-color: antiquewhite;
+    height: 480px;
+    width: 270px;
+    position: absolute;
+}
