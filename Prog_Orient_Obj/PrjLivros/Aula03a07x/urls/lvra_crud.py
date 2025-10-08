@@ -59,3 +59,26 @@ def delet(cod):
     else:
         msg += f" | {len(lstLA)} livros listados na database."
     return render_template("/lvra/edit.html", lstLA=lstLA, msg=msg)
+
+@bp_lvra.route("form_update/<int:idt>")
+def form_update(idt):
+    lvra_dao = Livros_AdDAO()
+    lvra=lvra_dao.consulta_id(idt)
+    aut_dao = AutoresDAO()
+    lst_aut = aut_dao.select_alfabetico()
+    return render_template("lvra/form_update.html", lvra=lvra, msg="", display="none", lst_aut=lst_aut)
+
+@bp_lvra.route("/save_update", methods=["POST"])
+def save_update():
+    lvra = Livros_Ad()
+    lvra.cod_livro = request.form["cod_livro"]
+    lvra.nome_livro = request.form["nome_livro"]
+    lvra.id_autor = request.form["id_autor"]
+
+    aut_dao = AutoresDAO()
+    lst_aut = aut_dao.select_alfabetico()
+
+    lvra_dao = Livros_AdDAO()
+    lvra_dao.atualizar_livros(lvra)
+    msg = f"Livro número {lvra.cod_livro} alterado."
+    return render_template("/lvra/form_update.html", lvra=lvra, msg=msg, lst_aut=lst_aut, display="block")

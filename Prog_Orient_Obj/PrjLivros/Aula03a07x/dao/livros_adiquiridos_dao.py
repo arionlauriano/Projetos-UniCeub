@@ -41,6 +41,26 @@ class Livros_AdDAO:
             print("Erro ao consultar tabela.")
             return []
         return lst_livra
+    
+    def consulta_id(self, cod_livro):
+        if not self.conexao:
+            return None
+        sql = "SELECT * FROM livros_adiquiridos WHERE cod_livro=%s"
+
+        try:
+            self.cursor.execute(sql, [cod_livro])
+            resultado = self.cursor.fetchone()
+            if resultado is None:
+                return None
+            else:
+                aut_dao = AutoresDAO()
+                autor = aut_dao.consulta_por_id(resultado[2])
+                livro=Livros_Ad(cod_livro=resultado[0], nome_livro=resultado[1], id_autor=resultado[2], autor=autor)
+                return livro
+        except mysql.connector.Error as err:
+            print(f"Erro:{err}")
+            return []
+
         
     def inserir_livros(self, Livros_Ad):
         if not mysql.connector:
@@ -91,5 +111,4 @@ if __name__ == "__main__":
 
     if dao.conexao:
         print("\nLivros Adquiridos:")
-        for livro in dao.selecionar():
-            print(livro)
+        print(dao.consulta_id(1))

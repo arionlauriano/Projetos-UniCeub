@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Alteração Livro</title>
+   <style>
+       /* Estilos aplicados diretamente aos campos de entrada */
+       input[type="text"], select {
+           width: 400px;
+           padding: 8px;
+           margin-bottom: 15px;
+           border: 2px solid #c0c0c0;
+           border-radius: 10px;
+           font-size: 1em;
+       }
+
+
+       /* Estilos aplicados ao botão */
+       button {
+           padding: 10px 20px;
+           background-color: #007bff;
+           color: white;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
+
+
+       button:hover {
+           background-color: #0056b3;
+       }
+       div{
+           margin: 20px;
+           padding: 10px 10px;
+           background-color: #ddaaaa;
+           border: 2px solid red;
+           width: 350px;
+           font-size: 1em;
+       }
+   </style>
+</head>
+<body>
+
+
+   <h1>Alteração de Livro</h1>
+
+
+   <form action="/lvra/save_update" method="post">
+       <label for="idt">Identificador:</label><br>
+       <input type="text" id="idt" name="cod_livro" value="{{lvra.cod_livro}}" readonly><br><br>
+
+
+       <label for="nome">Nome do Livro:</label><br>
+       <input type="text" id="nome" name="nome_livro" value="{{lvra.nome_livro}}" required>
+       <br><br>
+       <label for="autor">Autor do Livro:</label><br>
+       <select id="autor" name="id_autor">
+           {% for a in lst_aut %}
+              <option value="{{ a.id_autor }}"
+              {% if a.cod_autor == lvra.id_autor %}
+                  selected
+              {% endif %}
+              >{{ a.nome_autor }}</option>
+           {% endfor %}
+       </select>
+       <br><br>
+
+
+       <button type="submit">Salvar Alterações</button>
+   </form>
+   <br>
+   <div style="display: {{ display }};">{{ msg }}</div>
+   <hr>
+   [ <a href="/lvra/edit">Editar outros modelos</a> | <a href="/">Voltar ao Menu</a> ]
+</body>
+</html>
