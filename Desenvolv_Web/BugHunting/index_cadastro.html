@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+        .btn-primary {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Hospital Vida e Saúde</h1>
+        </header>
+        <h2>CADASTRO</h2>
+        <fieldset>
+        <form>
+            <label for="nome">Nome Completo<span>*</span></label><br>
+            <input type="text" id="nome" name="nome" required placeholder="Digite seu nome"><br><br>
+            <label for="email">Email<span>*</span></label><br>
+            <input type="email" id="email" name="email" required placeholder="Digite seu email"><br><br>
+            <label for="telefone">Telefone<span>*</span></label><br>
+            <input type="tel" id="telefone" name="telefone" required placeholder="Digite seu telefone"><br><br>
+            <label for="cpf">CPF<span>*</span></label><br>
+            <input type="text" id="cpf" name="cpf" required placeholder="Digite seu CPF"><br><br>
+            <label for="dataNascimento">Data de Nascimento<span>*</span></label><br>
+            <input class="date-input" type="date" id="dataNascimento" name="dataNascimento" required><br><br>
+            <label for="endereco">Endereço Completo<span>*</span></label><br>
+            <input type="text" id="endereco" name="endereco" required placeholder="Digite seu endereço"><br><br>
+            <label for="genero">Gênero<span>*</span></label><br>
+            <select id="genero" class="select" name="genero" required>
+                <option value="">Selecione</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="outro">Outro</option>
+            </select><br><br>
+            <label for="estadoCivil">Estado Civil<span>*</span></label><br>
+            <select id="estadoCivil" class="select" name="estadoCivil" required>
+                <option value="">Selecione</option>
+                <option value="solteiro">Solteiro(a)</option>
+                <option value="casado">Casado(a)</option>
+                <option value="divorciado">Divorciado(a)</option>
+                <option value="viuvo">Viúvo(a)</option>
+            </select><br><br>
+            <label for="senha">Senha<span>*</span></label><br>
+            <input type="password" id="senha" name="senha" required placeholder="Digite sua senha"><br><br>
+            <label for="confirmar">Confirmar Senha<span>*</span></label><br>
+            <input type="password" id="confirmar" name="confirmar" required placeholder="Confirme sua senha"><br>
+            <i>
+            <ul>
+                <li>1 caractere maiúsculo</li>
+                <li>1 caractere especial (@, #, $, %, &, *, etc)</li>
+                <li>Mínimo de 6 caracteres </li>
+            </ul>
+            </i><br>
+            <button type="submit" class="btn-primary-salvar" onclick="location.href='index_agenda.html'">Salvar</button>
+        </form>
+        </fieldset>
+        <br>
+        <button onclick="location.href='login.html'" class="btn-secondary">Voltar</button><br><br>
+    </div>
+    <div class="acessibilidade">
+        <button title="Aumentar Fonte">A+</button>
+        <button title="Contraste">🌙</button>
+        <button title="Leitor de Tela">🔊</button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendar Consulta</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Hospital Vida e Saúde</h1>
+        </header>
+        <h2>AGENDAMENTO</h2>
+        <fieldset>
+        <form>
+            <label for="especialidade">Especialidade*</label><br>
+            <select class="select" id="especialidade" name="especialidade" required>
+                <option value="">Selecione</option>
+                <option value="cardio">Cardiologista</option>
+                <option value="orto">Ortopedista</option>
+                <option value="hoto">Hotorrino</option>
+            </select><br><br>
+            <label for="medico">Médico*</label><br>
+            <select class="select" id="medico" name="medico" required>
+                <option value="">Selecione um médico</option>
+                <option value="Gabriel Santos">Gabriel Santos</option>
+                <option value="Sarah Cunha">Sarah Cunha</option>
+                <option value="Angeline da Silva">Angeline da Silva</option>
+            </select><br><br>
+            <label for="data">Data*</label><br>
+            <input class="date-input" type="date" id="data" name="data" required placeholder="dd/mm/aaaa"><br><br>
+            <label for="hora">Horário*</label><br>
+            <select class="select" id="hora" name="hora" required>
+                <option value="">Selecione</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+            </select><br><br>
+            <button type="submit" class="btn-primary-salvar" onclick="location.href='index_login.html'">Agendar</button>
+        </form>
+        </fieldset>
+        <br><br>
+        <button onclick="location.href='index_login.html'" class="btn-secondary">Voltar</button>
+    </div>
+</body>
+
+</html>
