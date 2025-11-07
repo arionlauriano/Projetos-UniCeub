@@ -1,6 +1,8 @@
 /*padrões*/
 body {
-    background-color: rgb(34, 87, 134);
+    background-image: url(imgs/op2.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 div {
@@ -138,3 +140,5 @@ p#center{
     width: 250px;
     margin: auto;
 }
+
+/*catalogo*/
