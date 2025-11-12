@@ -66,13 +66,15 @@ class ModeloDao:
         if not self.conexao:
             return None 
         
-        sql = "SELECT * FROM modelo WHERE cod_mont=%s ORDER BY nome_mod"
+        sql = "SELECT * FROM modelo WHERE cod_mont=%s ORDER BY cod_mont, nome_mod"
         try:
             self.cursor.execute(sql, [cod_mont])
             td_mod = self.cursor.fetchall()
             lst_mod = []
+            mont_dao= MontadoraDao()
             for row in td_mod:
-                mod=Modelo(id_mod=row[0], nome_mod=row[1], cod_mont=row[2])
+                mont=mont_dao.select_mont_id(row[2])
+                mod=Modelo(id_mod=row[0], nome_mod=row[1], cod_mont=row[2], mont=mont)
                 lst_mod.append(mod)
         except mysql.connetor.Error as err:
             lst_mod=None

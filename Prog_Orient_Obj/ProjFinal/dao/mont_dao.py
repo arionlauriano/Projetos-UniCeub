@@ -53,14 +53,13 @@ class MontadoraDao:
         except mysql.connector.Error as err:
             return f"Erro: {err}"
         
-    def dell_mont(self, mont):
+    def dell_mont(self, id_mont):
         if not self.conexao:
             return None
         
         sql="DELETE FROM montadora WHERE id_mont=%s"
-        valores=[mont.id_mont]
         try:
-            self.cursor.execute(sql, valores)
+            self.cursor.execute(sql,[id_mont])
             self.conexao.commit()
         except mysql.connector.Error as err:
             return f"Erro: {err}"
@@ -120,7 +119,7 @@ if __name__ == "__main__":
         mont1.sgl_mont="GWM"
         mont1.nome_mont="Great Wall Motors"
         mont_dao.update_mont(mont1)
-        mont_dao.dell_mont(mont3)
+        mont_dao.dell_mont(3)
 
         print("\n Conferindo Updates e Delets")
         for mont in mont_dao.select_mont_az():
