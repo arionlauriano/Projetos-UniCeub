@@ -18,8 +18,8 @@ cod_mont INT NOT NULL
 CREATE TABLE versao (
 id_vers INT AUTO_INCREMENT PRIMARY KEY,
 nome_vers VARCHAR(30) NOT NULL,
-vlr_mod DECIMAL(10,2) NOT NULL,
-img_mod VARCHAR(50),
+vlr_vers DECIMAL(10,2) NOT NULL,
+img_vers MEDIUMBLOB NULL,
 cod_mod INT NOT NULL
 );
 

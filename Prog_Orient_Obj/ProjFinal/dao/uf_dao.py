@@ -91,10 +91,10 @@ class UFdao:
             if result is None:
                 return None
             else:
-                estado=UF(id_uf=result[0], sgl_uf=result[1], nome_uf=result[2])
+                uf=UF(id_uf=result[0], sgl_uf=result[1], nome_uf=result[2])
         except mysql.connector.Error as err:
-            estado=None
-        return estado
+            uf=None
+        return uf
     
 if __name__ == "__main__":
     uf_dao = UFdao()

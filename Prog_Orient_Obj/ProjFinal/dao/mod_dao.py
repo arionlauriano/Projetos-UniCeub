@@ -9,7 +9,7 @@ class Modelo:
         self.mont=mont
 
     def __str__(self):
-        return f"ID Modelo: {self.id_mod} || Nome Modelo: {self.nome_mod} || Código Montadora {self.cod_mont} || Sigla Montadora: {self.montadora.sgl_mont} || Nome Montadora: {self.montadora.nome_mont}"
+        return f"ID Modelo: {self.id_mod} || Nome Modelo: {self.nome_mod} || Código Montadora {self.cod_mont} || Sigla Montadora: {self.mont.sgl_mont} || Nome Montadora: {self.mont.nome_mont}"
     
 class ModeloDao:
     def __init__(self, host="localhost", user="root", database="db_auto", password="Senha#"):
@@ -24,7 +24,7 @@ class ModeloDao:
             if self.conexao:
                 print("Conexao estabelecida com a database.")
         except mysql.connector.Error as err:
-            return f"Erro: {err}"
+            return None
     
     def add_mod(self, mod):
         if not self.conexao:
@@ -55,18 +55,37 @@ class ModeloDao:
         if not self.conexao:
             return None
         
-        sql= "DLETE FROM modelo WHERE id_mod=%s"
+        sql= "DELETE FROM modelo WHERE id_mod=%s"
         try:
             self.cursor.execute(sql, [id_mod])
             self.conexao.commit()
         except mysql.connector.Error as err:
             return f"Erro: {err}"
+        
+    def select_mod_az(self):
+        if not self.conexao:
+            return None 
+        
+        sql = "SELECT * FROM modelo ORDER BY cod_mont, nome_mod"
+        try:
+            self.cursor.execute(sql)
+            td_mod = self.cursor.fetchall()
+            lst_mod = []
+            mont_dao= MontadoraDao()
+            for row in td_mod:
+                mont=mont_dao.select_mont_id(row[2])
+                mod=Modelo(id_mod=row[0], nome_mod=row[1], cod_mont=row[2], mont=mont)
+                lst_mod.append(mod)
+        except mysql.connetor.Error as err:
+            lst_mod=None
+            return f"Erro: {err}"
+        return lst_mod
     
     def select_mod_mont_az(self, cod_mont):
         if not self.conexao:
             return None 
         
-        sql = "SELECT * FROM modelo WHERE cod_mont=%s ORDER BY cod_mont, nome_mod"
+        sql = "SELECT * FROM modelo WHERE cod_mont=%s ORDER BY nome_mod"
         try:
             self.cursor.execute(sql, [cod_mont])
             td_mod = self.cursor.fetchall()
@@ -80,4 +99,24 @@ class ModeloDao:
             lst_mod=None
             return f"Erro: {err}"
         return lst_mod
+    
+    def select_mod_id(self, id_mod):
+        if not self.conexao:
+            return None
+        
+        sql="SELECT * FROM modelo WHERE id_mod=%s"
+        try:
+            self.cursor.execute(sql, [id_mod])
+            result=self.cursor.fetchone()
+            if result is None:
+                return None
+            else:
+                mont_dao=MontadoraDao()
+                mont=mont_dao.select_mont_id(result[2])
+                mod=Modelo(id_mod=result[0], nome_mod=result[1], cod_mont=result[2], mont=mont)
+                return mod
+        except mysql.connector.Error as err:
+            return f"Erro: {err}"
+        
+
     
