@@ -150,4 +150,4 @@ if __name__ =="__main__":
         for cli in cli_dao.select_cli_az():
             print(cli)
 
-
+ 

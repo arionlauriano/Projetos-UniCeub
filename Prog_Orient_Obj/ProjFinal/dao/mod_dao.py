@@ -118,5 +118,27 @@ class ModeloDao:
         except mysql.connector.Error as err:
             return f"Erro: {err}"
         
+if __name__ == "__main__":
+    mod_dao = ModeloDao()
+    if mod_dao.conexao:
+        mod1=Modelo(nome_mod="teste1", cod_mont=3)
+        mod2=Modelo(nome_mod="teste2", cod_mont=3)
 
-    
+        mod_dao.add_mod(mod1)
+        mod_dao.add_mod(mod2)
+
+        print("\n Teste select_mont_mod:")
+        for mod in mod_dao.select_mod_mont_az(3):
+            print(mod)
+
+        print("\n Teste select_mod_id:")
+        print(mod_dao.select_mod_id(2))
+
+        mod_dao.dell_mod(mod1.id_mod)
+
+        mod2.nome_mod="testeUpdate"
+        mod_dao.update_mod(mod2)
+
+        print("\n Teste select_mod_az:")
+        for mod in mod_dao.select_mod_az():
+            print(mod)

@@ -123,4 +123,4 @@ if __name__ == "__main__":
 
         print("\n Teste Dell e Update:")
         for uf in uf_dao.select_uf_az():
-            print(uf)
+            print(uf) 

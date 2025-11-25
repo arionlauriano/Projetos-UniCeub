@@ -2,7 +2,7 @@ import mysql.connector
 from mod_dao import Modelo, ModeloDao
 
 class Versao:
-    def __init__(self, id_vers=None, nome_vers="", vlr_vers="", img_vers="", cod_mod=None, mod=None):
+    def __init__(self, id_vers=None, nome_vers="", vlr_vers="", img_vers=None, cod_mod=None, mod=None):
         self.id_vers=id_vers
         self.nome_vers=nome_vers
         self.vlr_vers=vlr_vers
@@ -32,8 +32,10 @@ class VersaoDao:
         if not self.conexao:
             return None
         
-        sql="INSERT INTO versao (nome_vers, vlr_vers, img_vers, cod_mod)"
-        valores = (vers.nome_vers, vers.vlr_vers, vers.img_vers, vers.cod_mod)
+        sql="INSERT INTO versao (nome_vers, vlr_vers, img_vers, cod_mod) VALUES (%s, %s, %s, %s)"
+        valores = [vers.nome_vers, vers.vlr_vers, vers.img_vers, vers.cod_mod]
+        if not valores[2]:
+            valores[2]="NULL"
         try:
             self.cursor.execute(sql, valores)
             self.conexao.commit()
@@ -106,7 +108,7 @@ class VersaoDao:
         if not self.conexao:
             return None
         
-        sql="SELECT * FROM vers WHERE id_vers=%s"
+        sql="SELECT * FROM versao WHERE id_vers=%s"
         try:
             self.cursor.execute(sql, [id_vers])
             result=self.cursor.fetchone()
@@ -119,3 +121,28 @@ class VersaoDao:
                 return vers
         except mysql.connector.Error as err:
             return f"Erro: {err}"
+        
+if __name__=="__main__":
+    vers_dao=VersaoDao()
+    if vers_dao.conexao:
+        vers1=Versao(nome_vers="teste1", vlr_vers="123.00", cod_mod=3)
+        vers2=Versao(nome_vers="teste2", vlr_vers="456.78", cod_mod=3)
+
+        vers_dao.add_vers(vers1)
+        vers_dao.add_vers(vers2)
+
+        print("\n Teste select_vers_mod:")
+        for vers in vers_dao.select_vers_mod_az(3):
+            print(vers)
+
+        print("\n Teste select_vers_id:")
+        print(vers_dao.select_vers_id(vers1.id_vers))
+
+        vers_dao.dell_vers(vers1.id_vers)
+
+        vers2.nome_vers="testeUpdate"
+        vers_dao.update_vers(vers2)
+
+        print("\n Teste select_vers_az:")
+        for vers in vers_dao.select_vers_az():
+            print(vers)
