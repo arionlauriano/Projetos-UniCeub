@@ -1,5 +1,5 @@
 import mysql.connector
-from uf_dao import UF, UFdao
+from dao.uf_dao import UF, UFdao
 
 class Cliente:
     def __init__(self, id_cli=None, nome_cli="", data_nasc_cli="", cod_uf=None, cep_cli="", end_cli="", uf=None):

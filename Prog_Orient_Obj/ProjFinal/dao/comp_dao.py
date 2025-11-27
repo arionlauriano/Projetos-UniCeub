@@ -1,7 +1,7 @@
 import mysql.connector
-from vers_dao import Versao, VersaoDao
-from cli_dao import Cliente, ClienteDao
-from uf_dao import UF, UFdao
+from dao.vers_dao import Versao, VersaoDao
+from dao.cli_dao import Cliente, ClienteDao
+from dao.uf_dao import UF, UFdao
 
 class Compra:
     def __init__(self, id_comp=None, data_comp="", cod_nf_comp="", total_comp="", cod_cli=None, cod_vers=None, cli=None, vers=None):

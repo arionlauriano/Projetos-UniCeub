@@ -1,5 +1,5 @@
 import mysql.connector
-from mont_dao import Montadora, MontadoraDao
+from dao.mont_dao import Montadora, MontadoraDao
 
 class Modelo:
     def __init__(self, id_mod=None, nome_mod="", cod_mont=None, mont=None):

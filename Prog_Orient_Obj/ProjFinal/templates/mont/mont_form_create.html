@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Montadora</title>
+    <link rel="stylesheet" href="mont.css">
+</head>
+
+<body>
+
+    <br><br>
+    <h1>Nova Montadora</h1>
+    <div class="form">
+        <form action="/mont/mont_create" method="post">
+            <label for="sgl">Sigla da Montadora:</label><br>
+            <input type="text" name="sgl_mont" id="sgl" required>
+            <br><br>
+            <label for="nome">Nome da Montadora:</label><br>
+            <input type="text" id="nome" name="nome_mont" required>
+            <br><br>
+
+            <button type="submit">Adicionar</button>
+
+            <br><br>
+            <div class="msg" style="display: {{display}};">{{ msg }}</div> <br>
+            <a class="return" href="/">Voltar ao Menu</a>
+        </form>
+    </div>
+
+</body>
+
+</html>

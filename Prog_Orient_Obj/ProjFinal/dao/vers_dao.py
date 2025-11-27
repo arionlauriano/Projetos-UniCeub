@@ -1,5 +1,5 @@
 import mysql.connector
-from mod_dao import Modelo, ModeloDao
+from dao.mod_dao import Modelo, ModeloDao
 
 class Versao:
     def __init__(self, id_vers=None, nome_vers="", vlr_vers="", img_vers=None, cod_mod=None, mod=None):

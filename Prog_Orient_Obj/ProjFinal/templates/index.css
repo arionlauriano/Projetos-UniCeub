@@ -6,7 +6,7 @@ body {
     background-color: rgb(188, 201, 212);
 }
 
-.container-menu {
+.container {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -32,10 +32,11 @@ body {
     box-shadow: 0 0 15px rgb(24, 41, 56);
 }
 
-h1.menu{
+h1{
     text-align: center;
     color: rgb(9, 62, 108);
     font-weight: 800;
+    text-decoration: underline;
 }
 
 hr.card-line {
