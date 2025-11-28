@@ -35,7 +35,7 @@
         .form {
             flex: 1 1 300px;
             padding: 20px;
-            width: 60%;
+            width: 80%;
             margin: auto;
             background-color: aliceblue;
             border-radius: 10px;
@@ -43,6 +43,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        form {
+            width: 80%;
         }
 
         label {
@@ -55,11 +59,12 @@
 
         input {
             height: 25px;
-            width: 80%;
+            width: 55%;
             border-width: 3px;
             border-radius: 8px;
             border-color: rgb(32, 91, 142);
             border-style: solid;
+            text-align: center;
         }
 
         input:focus {
@@ -117,17 +122,17 @@
         <div class="form">
             <form action="/mont/mont_create" method="post">
                 <label for="sgl">Sigla da Montadora:</label><br>
-                <input type="text" name="sgl_mont" id="sgl" required>
+                <input type="text" name="sgl_mont" id="sgl" required placeholder="Insira a Sigla">
                 <br><br>
                 <label for="nome">Nome da Montadora:</label><br>
-                <input type="text" id="nome" name="nome_mont" required>
+                <input type="text" id="nome" name="nome_mont" required placeholder="Insira o Nome">
                 <br><br>
 
                 <button type="submit">Adicionar</button>
 
                 <br><br>
                 <div class="msg" style="display: {{display}};">{{ msg }}</div> <br>
-                <a class="redirect" href="/">Voltar ao Menu</a>
+                <p><a class="redirect" href="/">Voltar ao Menu</a> ou <a href="/mont/mont_read" class="redirect">Visualizar Montadoras</a></p>
             </form>
         </div>
     </div>

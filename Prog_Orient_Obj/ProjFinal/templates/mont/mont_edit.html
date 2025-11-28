@@ -4,7 +4,7 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Montadoras</title>
+    <title>Edição das Montadoras</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -35,7 +35,7 @@
         .outer {
             text-align: center;
             max-width: 1000px;
-            width: 70%;
+            width: 80%;
             margin: auto;
             padding: 20px;
             background-color: rgb(121, 142, 161);
@@ -46,7 +46,8 @@
         .table {
             flex: 1 1 300px;
             padding: 20px;
-            width: 60%;
+            
+            width: 90%;
             margin: auto;
             background-color: aliceblue;
             border-radius: 10px;
@@ -74,7 +75,7 @@
         
         td {
             border: 2px solid rgb(79, 116, 148);
-            height: 25px;
+            height: 40px;
             background-color: rgba(208, 229, 248, 0.376);
         }
 
@@ -96,11 +97,40 @@
         a.redirect:hover {
             box-shadow: 0 0 4px;
         }
+
+        a.dell {
+            text-decoration: none;
+            font-size: 15px;
+            color: rgb(250, 253, 255);
+            background-color: rgb(182, 50, 50);
+            border-radius: 5px;
+            border: none;
+            padding: 8px;
+            transition: 0.5s;
+        }
+        a.dell:hover {
+            box-shadow: 0 0 5px rgb(136, 32, 32);
+        }
+
+        a.edit {
+            text-decoration: none;
+            font-size: 15px;
+            color: rgb(250, 253, 255);
+            background-color: rgb(5, 84, 134);
+            border-radius: 5px;
+            border: none;
+            padding: 8px;
+            transition: 0.5s;
+        }
+
+        a.edit:hover {
+            box-shadow: 0 0 5px rgb(1, 89, 144);
+        }
     </style>
 </head>
 
 <body>
-    <h1>Lista de Montadoras</h1>
+    <h1>Editar Montadoras</h1>
     <div class="outer">
     <div class="table">
     <table>
@@ -109,6 +139,7 @@
                 <th>Sigla</th>
                 <th>Nome</th>
                 <th>Identificador</th>
+                <th>Edição</th>
             </tr>
         </thead>
         <tbody>
@@ -117,13 +148,16 @@
                 <td>{{mont.sgl_mont}}</td>
                 <td>{{mont.nome_mont}}</td>
                 <td>{{mont.id_mont}}</td>
+                <td>
+                    <a href="/mont/mont_dell/{{ mont.id_mont }}" class="dell" onclick="return confirm('Deseja excluir a montadora, {{ mont.sgl_mont }} - {{ mont.nome_mont }} da database?')">Excluir</a> <a href="mont/form_update/{{ mont.id_mont }}" class="edit">Alterar</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <br><br>
     <div class="msg">{{msg}}</div> <br>
-    <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/mont/mont_edit" class="redirect">Editar Montadoras</a></p>
+    <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/mont/mont_form_create" class="redirect">Adicionar Nova Montadora</a></p>
     </div>
     </div>
 </body>

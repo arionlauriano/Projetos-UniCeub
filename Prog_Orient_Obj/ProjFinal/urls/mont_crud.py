@@ -28,5 +28,29 @@ def mont_read():
     if not lst:
         msg = "Não há montadoras da database."
     else:
-        msg = f"{len(lst)} montadoras lsitadas na database."
+        msg = f"{len(lst)} montadoras listadas na database."
     return render_template("/mont/mont_read.html", msg=msg, lst=lst)
+
+@bp_mont.route("/mont_edit")
+def mont_edit():
+    mont_dao = MontadoraDao()
+    lst = mont_dao.select_mont_az()
+    if not lst:
+        msg = "Não há montadoras na database"
+    else:
+        msg = f"{len(lst)} montadoras listadas na database"
+    return render_template("/mont/mont_edit.html", msg=msg, lst=lst)
+
+@bp_mont.route("/mont_dell/<int:cod>")
+def mont_dell(cod):
+    mont_dao = MontadoraDao()
+    if not mont_dao.dell_mont(cod):
+        msg = "Montadora excluída da database."
+    else:
+        msg = "Erro ao excluir montadora. Confira se há modelos associados."
+    lst = mont_dao.select_mont_az()
+    if not lst:
+        msg += "| Não há montadoras na database."
+    else:
+        msg += f"| {len(lst)} montadoras listadas na database."
+    return render_template("/mont/mont_edit.html", msg=msg, lst=lst)
