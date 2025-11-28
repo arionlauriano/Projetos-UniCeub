@@ -5,28 +5,131 @@
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Montadora</title>
-    <link rel="stylesheet" href="mont.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            background-color: rgb(188, 201, 212);
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            color: rgb(9, 62, 108);
+            font-weight: 800;
+        }
+
+        .outer {
+            text-align: center;
+            max-width: 1000px;
+            width: 70%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgb(121, 142, 161);
+            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.345);
+            border-radius: 10px;
+        }
+
+        .form {
+            flex: 1 1 300px;
+            padding: 20px;
+            width: 60%;
+            margin: auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 20px;
+            margin-bottom: 0px;
+            color: rgb(32, 91, 142);
+            font-weight: 600;
+            width: 80%;
+        }
+
+        input {
+            height: 25px;
+            width: 80%;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+        }
+
+        input:focus {
+            border-color: rgb(106, 132, 158);
+            outline: none;
+        }
+
+        button {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(0, 47, 88);
+            background-color: rgb(141, 189, 231);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 5px;
+        }
+
+        div.msg {
+            width: 90%;
+            padding: 10px;
+            border: solid;
+            border-color: rgb(213, 63, 63);
+            border-radius: 5px;
+            background-color: rgba(213, 63, 63, 0.222);
+            color: rgb(68, 1, 1);
+        }
+
+        a.redirect {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 47, 88, 0.8);
+            background-color: rgba(141, 189, 231, 0.580);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        a.redirect:hover {
+            box-shadow: 0 0 4px;
+        }
+    </style>
 </head>
 
 <body>
 
     <br><br>
     <h1>Nova Montadora</h1>
-    <div class="form">
-        <form action="/mont/mont_create" method="post">
-            <label for="sgl">Sigla da Montadora:</label><br>
-            <input type="text" name="sgl_mont" id="sgl" required>
-            <br><br>
-            <label for="nome">Nome da Montadora:</label><br>
-            <input type="text" id="nome" name="nome_mont" required>
-            <br><br>
+    <div class="outer">
+        <div class="form">
+            <form action="/mont/mont_create" method="post">
+                <label for="sgl">Sigla da Montadora:</label><br>
+                <input type="text" name="sgl_mont" id="sgl" required>
+                <br><br>
+                <label for="nome">Nome da Montadora:</label><br>
+                <input type="text" id="nome" name="nome_mont" required>
+                <br><br>
 
-            <button type="submit">Adicionar</button>
+                <button type="submit">Adicionar</button>
 
-            <br><br>
-            <div class="msg" style="display: {{display}};">{{ msg }}</div> <br>
-            <a class="return" href="/">Voltar ao Menu</a>
-        </form>
+                <br><br>
+                <div class="msg" style="display: {{display}};">{{ msg }}</div> <br>
+                <a class="redirect" href="/">Voltar ao Menu</a>
+            </form>
+        </div>
     </div>
 
 </body>

@@ -20,3 +20,13 @@ def mont_create():
     else:
         msg = f"Montadora, {mont.sgl_mont} - {mont.nome_mont}, adicionada."
     return render_template("/mont/mont_form_create.html", msg=msg, display="block")
+
+@bp_mont.route("/mont_read")
+def mont_read():
+    mont_dao = MontadoraDao()
+    lst = mont_dao.select_mont_az()
+    if not lst:
+        msg = "Não há montadoras da database."
+    else:
+        msg = f"{len(lst)} montadoras lsitadas na database."
+    return render_template("/mont/mont_read.html", msg=msg, lst=lst)

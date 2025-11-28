@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Montadoras</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            background-color: rgb(188, 201, 212);
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            color: rgb(9, 62, 108);
+            font-weight: 800;
+        }
+
+        div.msg {
+            width: 90%;
+            padding: 10px;
+            border: solid;
+            border-color: rgb(213, 63, 63);
+            border-radius: 5px;
+            background-color: rgba(213, 63, 63, 0.176);
+            color: rgb(68, 1, 1);
+
+        }
+
+        .outer {
+            text-align: center;
+            max-width: 1000px;
+            width: 70%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgb(121, 142, 161);
+            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.345);
+            border-radius: 10px;
+        }
+
+        .table {
+            flex: 1 1 300px;
+            padding: 20px;
+            width: 60%;
+            margin: auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 2px solid rgb(79, 116, 148);
+            font-size: 18px;
+            height: 30px;
+            border-bottom: 3px solid rgb(79, 116, 148);
+            background-color: rgb(208, 229, 248);
+            color: rgb(1, 43, 80);
+        }
+        
+        td {
+            border: 2px solid rgb(79, 116, 148);
+            height: 25px;
+            background-color: rgba(208, 229, 248, 0.376);
+        }
+
+        tr:hover {
+            box-shadow: 0 0 5px rgb(26, 148, 255);
+        }
+
+        a.redirect {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 47, 88, 0.8);
+            background-color: rgba(141, 189, 231, 0.580);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        a.redirect:hover {
+            box-shadow: 0 0 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lista de Montadoras</h1>
+    <div class="outer">
+    <div class="table">
+    <table>
+        <thead>
+            <tr>
+                <th>Sigla</th>
+                <th>Nome</th>
+                <th>Identificador</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mont in lst %}
+            <tr>
+                <td>{{mont.sgl_mont}}</td>
+                <td>{{mont.nome_mont}}</td>
+                <td>{{mont.id_mont}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+    <div class="msg">{{msg}}</div> <br>
+    <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/mont/mont_edit" class="redirect">Editar Montadoras</a></p>
+    </div>
+    </div>
+</body>
+
+</html>
