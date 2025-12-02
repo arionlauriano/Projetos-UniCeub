@@ -149,7 +149,7 @@
                 <td>{{mont.nome_mont}}</td>
                 <td>{{mont.id_mont}}</td>
                 <td>
-                    <a href="/mont/mont_dell/{{ mont.id_mont }}" class="dell" onclick="return confirm('Deseja excluir a montadora, {{ mont.sgl_mont }} - {{ mont.nome_mont }} da database?')">Excluir</a> <a href="mont/form_update/{{ mont.id_mont }}" class="edit">Alterar</a>
+                    <a href="/mont/mont_dell/{{ mont.id_mont }}" class="dell" onclick="return confirm('Deseja excluir a montadora, {{ mont.sgl_mont }} - {{ mont.nome_mont }} da database?')">Excluir</a> <a href="/mont/mont_update/{{ mont.id_mont }}" class="edit">Alterar</a>
                 </td>
             </tr>
             {% endfor %}

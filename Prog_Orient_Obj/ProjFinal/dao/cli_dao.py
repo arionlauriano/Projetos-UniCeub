@@ -67,7 +67,7 @@ class ClienteDao:
         if not self.conexao:
             return None
         
-        sql="SELECT * FROM cliente ORDER BY nome_cli"
+        sql="SELECT * FROM cliente ORDER BY nome_cli, cod_uf"
         try:
             self.cursor.execute(sql)
             td_cli=self.cursor.fetchall()
