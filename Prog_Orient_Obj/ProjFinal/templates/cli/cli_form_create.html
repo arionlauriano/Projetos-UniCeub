@@ -132,6 +132,9 @@
             border-style: solid;
             text-align: center;
         }
+        span {
+            color: brown;
+        }
     </style>
 </head>
 <body>
@@ -140,20 +143,20 @@
     <div class="outer">
         <div class="form">
             <form action="/cli/cli_create" method="post">
-                <label for="nome_cli">Nome Completo:</label><br>
+                <label for="nome_cli">Nome Completo:<span>*</span></label><br>
                 <input type="text" name="nome_cli" id="nome" placeholder="Nome do Cliente" required><br><br>
-                <label for="data_nasc">Data de Nascimento:</label><br>
+                <label for="data_nasc">Data de Nascimento:<span>*</span></label><br>
                 <input type="text" name="data_nasc_cli" id="data_nasc" placeholder="AAAA-MM-DD" required><br><br>
-                <label for="cod_uf">Unidade Federativa:</label><br>
+                <label for="cod_uf">Unidade Federativa:<span>*</span></label><br>
                 <select name="cod_uf" id="cod_uf">
                     <option value="none">Escolha uma Unidade</option>
                     {% for uf in lst_uf %}
                     <option value="{{ uf.id_uf }}">{{ uf.sgl_uf }} - {{ uf.nome_uf }}</option>
                     {% endfor %}
                 </select><br><br>
-                <label for="cep_cli">CEP:</label><br>
+                <label for="cep_cli">CEP:<span>*</span></label><br>
                 <input type="text" name="cep_cli" id="cep_cli" placeholder="00000-000" required><br><br>
-                <label for="end_cli">Endereço:</label><br>
+                <label for="end_cli">Endereço:<span>*</span></label><br>
                 <input type="text" name="end_cli" id="end_cli" placeholder="Endereço do cliente" required><br><br>
 
                 <button type="submit">Adicionar</button>

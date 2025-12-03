@@ -101,7 +101,7 @@ def cli_dell(cod):
         msg += " | Erro ao excluir cliente. Confira se há compras associadas."
     return render_template("/cli/cli_edit.html", msg=msg, lst=lst, lst_uf=lst_uf)
 
-@bp_cli.route("/cli_update/<id:cod>")
+@bp_cli.route("/cli_update/<int:cod>")
 def cli_form_update(cod):
     cli_dao = ClienteDao()
     cli = cli_dao.select_cli_id(cod)

@@ -94,7 +94,7 @@ def vers_dell(cod):
     if not vers_dao.select_vers_id(cod):
         msg += " | Versão excluída da database."
     else:
-        msg += " | Erro ao exluir versão. Confira se há modelos associados."
+        msg += " | Erro ao exluir versão."
 
     lst = vers_dao.select_vers_az()
     
@@ -103,7 +103,7 @@ def vers_dell(cod):
 
     return render_template("/vers/vers_edit.html", msg=msg, lst=lst, lst_mod=lst_mod)
 
-@bp_vers.route("/vers_update/<id:cod>")
+@bp_vers.route("/vers_update/<int:cod>")
 def vers_form_update(cod):
     vers_dao = VersaoDao()
     vers = vers_dao.select_vers_id(cod)
