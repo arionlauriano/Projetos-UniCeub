@@ -8,7 +8,7 @@ bp_cli = Blueprint("cli", __name__)
 def cli_form_create():
     uf_dao = UFdao()
     lst_uf = uf_dao.select_uf_az()
-    return render_template("cli/cli_form_create.html", msg="", display="none", lst_uf=lst_uf)
+    return render_template("/cli/cli_form_create.html", msg="", display="none", lst_uf=lst_uf)
 
 @bp_cli.route("/cli_create", methods=["POST"])
 def cli_create():
@@ -105,7 +105,10 @@ def cli_dell(cod):
 def cli_form_update(cod):
     cli_dao = ClienteDao()
     cli = cli_dao.select_cli_id(cod)
-    return render_template("/cli/cli_update.html", cli=cli, msg="", display="none")
+
+    uf_dao = UFdao()
+    lst_uf = uf_dao.select_uf_az()    
+    return render_template("/cli/cli_update.html", cli=cli, msg="", display="none", lst_uf=lst_uf)
 
 @bp_cli.route("/cli_save_update", methods=["POST"])
 def cli_save_update():
@@ -122,4 +125,6 @@ def cli_save_update():
 
     msg = f"Cliente, {cli.nome_cli}, atualizado."
 
-    return render_template("/cli/cli_update.html", cli=cli, msg=msg, display="block")
+    uf_dao = UFdao()
+    lst_uf = uf_dao.select_uf_az()
+    return render_template("/cli/cli_update.html", cli=cli, msg=msg, display="block", lst_uf=lst_uf)
