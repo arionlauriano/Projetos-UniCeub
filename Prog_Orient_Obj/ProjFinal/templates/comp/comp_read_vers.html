@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            background-color: rgb(188, 201, 212);
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            color: rgb(9, 62, 108);
+            font-weight: 800;
+        }
+
+        .msg {
+            width: 90%;
+            padding: 10px;
+            border: solid;
+            border-color: rgb(213, 63, 63);
+            border-radius: 5px;
+            background-color: rgba(213, 63, 63, 0.176);
+            color: rgb(68, 1, 1);
+
+        }
+
+        .outer {
+            text-align: center;
+            max-width: 1000px;
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgb(121, 142, 161);
+            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.345);
+            border-radius: 10px;
+        }
+
+
+        .filter {
+            flex: 1 1 300px;
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            width: 80%;
+        }
+
+        label {
+            font-size: 20px;
+            margin-bottom: 0px;
+            color: rgb(32, 91, 142);
+            font-weight: 600;
+            width: 80%;
+        }
+
+        input {
+            height: 25px;
+            width: 55%;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: rgb(106, 132, 158);
+            outline: none;
+        }
+
+        button {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(0, 47, 88);
+            background-color: rgb(141, 189, 231);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 5px;
+        }
+
+        h2 {
+            text-align: center;
+            text-decoration: none;
+            color: rgb(9, 62, 108);
+            font-weight: 800;
+            font-size: 28px;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        hr.card-line {
+            border: none;
+            height: 3px;
+            width: 80%;
+            background-color: rgb(127, 174, 215);
+        }
+
+        select.select {
+            height: 35px;
+            width: 55%;
+            font-size: 15px;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+
+        option {
+            height: 35px;
+            width: 55%;
+            font-size: 15px;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+
+        .table {
+            flex: 1 1 300px;
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 2px solid rgb(79, 116, 148);
+            font-size: 15px;
+            height: 25px;
+            border-bottom: 3px solid rgb(79, 116, 148);
+            background-color: rgb(208, 229, 248);
+            color: rgb(1, 43, 80);
+        }
+
+        td {
+            border: 2px solid rgb(79, 116, 148);
+            height: fit-content;
+
+            background-color: rgba(208, 229, 248, 0.376);
+            font-size: 12px;
+        }
+
+        tr:hover {
+            box-shadow: 0 0 5px rgb(1, 116, 217);
+        }
+
+        a.redirect {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 47, 88, 0.8);
+            background-color: rgba(141, 189, 231, 0.580);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        a.redirect:hover {
+            box-shadow: 0 0 4px;
+        }
+
+        img {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lista de Compras</h1>
+    <div class="outer">
+        <div class="filter">
+            <p class="msg">Filtrando compras registrados para versão {{vers.mod.nome_mod}} - {{vers.nome_vers}}.</p>
+            <a href="/comp/comp_read" class="redirect">Remover Filtro</a>
+        </div>
+        <br>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificador:</th>
+                        <th>AAAA-MM-DD</th>
+                        <th>Nota Fiscal</th>
+                        <th>Total</th>
+                        <th>Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comp in lst %}
+                    <tr>
+                        <td>{{comp.id_comp}}</td>
+                        <td>{{comp.data_comp}}</td>
+                        <td>{{comp.cod_nf_comp}}</td>
+                        <td>{{comp.total_comp}}</td>
+                        <td>{{comp.cli.id_cli}} - {{comp.cli.nome_cli}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><br>
+            <div class="msg">{{msg}}</div> <br>
+            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/comp/comp_edit" class="redirect">Editar Compras</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

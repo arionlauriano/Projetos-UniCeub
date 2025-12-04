@@ -111,7 +111,7 @@
         a.redirect:hover {
             box-shadow: 0 0 4px;
         }
-        select#cod_mod {
+        select.select {
             height: 35px;
             width: 55%;
             font-size: 15px;
@@ -146,26 +146,32 @@
 
     <div class="outer">
         <div class="form">
-            <form action="/vers/vers_create" method="post">
-                <label for="nome_vers">Nome:<span>*</span></label><br>
-                <input type="text" name="nome_vers" id="nome" placeholder="Nome da Versão" required><br><br>
-                <label for="data_nasc">Valor:<span>*</span></label><br>
-                <input type="text" name="vlr_vers" id="vlr_vers" placeholder="000.00" required><br><br>
-                <label for="img_vers">Imagem:</label><br>
-                <input type="text" name="img_vers" id="img_vers" placeholder="Endereço da Imagem"><br>
-                <i>Digite o endereço do arquivo de imagem.</i><br><br>
-                <label for="cod_mod">Modelo:<span>*</span></label><br>
-                <select name="cod_mod" id="cod_mod" required>
-                    <option value="none">Selecione um Modelo:</option>
-                    {% for mod in lst_mod %}
-                    <option value="{{ mod.id_mod }}">{{ mod.nome_mod }} - [ {{ mod.mont.slg_mont }} - {{ mod.mont.nome_montadora }} ]</option>
+            <form action="/comp/comp_create" method="post">
+                <label for="data_comp">Data da Compra:<span>*</span></label><br>
+                <input type="text" name="data_comp" id="data_comp" placeholder="AAAA-MM-DD" required><br><br>
+                <label for="cod_nf">Código NF:<span>*</span></label><br>
+                <input type="text" name="cod_nf" id="cod_nf" placeholder="Código da Nota Fiscal" required><br><br>
+                <label for="total_comp">Total da Compra:</label><br>
+                <input type="text" name="total_comp" id="total_comp" placeholder="000.00"><br><br>
+                <label for="cod_cli">Cliente:<span>*</span></label><br>
+                <select name="cod_cli" id="cod_cli" class="select" required>
+                    <option value="none">Selecione um Cliente:</option>
+                    {% for cli in lst_cli %}
+                    <option value="{{ cli.id_cli }}">{{ cli.id_cli }} - {{ cli.nome_cli }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="cod_vers">Versão:<span>*</span></label><br>
+                <select name="cod_vers" id="cod_vers"  class="select" required>
+                    <option value="none">Selecione uma Versão:</option>
+                    {% for vers in lst_vers %}
+                    <option value="{{ vers.id_vers }}">{{ vers.nome_vers }} - {{ vers.mod.nome_mod }}</option>
                     {% endfor %}
                 </select><br><br>
 
                 <button type="submit">Adicionar</button>
             </form><br>
             <div class="msg" style="display: {{ display }};">{{ msm }}</div><br>
-            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/vers/vers_read" class="redirect">Visualizar Versões</a></p>
+            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/comp/comp_read" class="redirect">Visualizar Compras</a></p>
         </div>
     </div>
 </body>
