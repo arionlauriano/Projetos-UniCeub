@@ -210,7 +210,7 @@
                 <select name="cod_mod" id="cod_mod" required>
                     <option value="none">Selecione um Modelo:</option>
                     {% for mod in lst_mod %}
-                    <option value="{{ mod.id_mod }}">{{ mod.nome_mod }} - [ {{ mod.mont.slg_mont }} - {{ mod.mont.nome_montadora }} ]</option>
+                    <option value="{{ mod.id_mod }}">{{mod.nome_mod}} - [  {{mod.mont.sgl_mont}} - {{mod.mont.nome_mont}} ]</option>
                     {% endfor %}
                 </select><br><br>
                 <button type="submit">Filtrar</button>
@@ -220,20 +220,20 @@
         <div class="table">
             <table>
                 <thead>
-                    <tr>
+                   <tr>
                         <th>Imagem</th>
+                        <th>Modelo</th>
                         <th>Versão</th>
                         <th>Valor</th>
-                        <th>Modelo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cli in lst %}
+                    {% for vers in lst %}
                     <tr>
                         <td><img src="{{vers.img_vers}}" alt="Sem Imagem."></td>
+                        <td>[ {{vers.mod.mont.sgl_mont}} - {{vers.mod.mont.nome_mont}} ] - {{vers.mod.nome_mod}}</td>
                         <td>{{vers.nome_vers}}</td>
                         <td>{{vers.vlr_vers}}</td>
-                        <td>{{vers.mod.nome_mod}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

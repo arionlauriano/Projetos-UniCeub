@@ -158,13 +158,13 @@
                 <select name="cod_mod" id="cod_mod" required>
                     <option value="none">Selecione um Modelo:</option>
                     {% for mod in lst_mod %}
-                    <option value="{{ mod.id_mod }}">{{ mod.nome_mod }} - [ {{ mod.mont.slg_mont }} - {{ mod.mont.nome_montadora }} ]</option>
+                    <option value="{{ mod.id_mod }}">{{mod.nome_mod}} - [  {{mod.mont.sgl_mont}} - {{mod.mont.nome_mont}} ]</option>
                     {% endfor %}
                 </select><br><br>
 
                 <button type="submit">Adicionar</button>
             </form><br>
-            <div class="msg" style="display: {{ display }};">{{ msm }}</div><br>
+            <div class="msg" style="display: {{ display }};">{{ msg }}</div><br>
             <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/vers/vers_read" class="redirect">Visualizar Versões</a></p>
         </div>
     </div>

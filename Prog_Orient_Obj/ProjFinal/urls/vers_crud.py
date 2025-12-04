@@ -7,7 +7,7 @@ bp_vers = Blueprint("vers", __name__)
 @bp_vers.route("/vers_form_create")
 def vers_form_create():
     mod_dao = ModeloDao()
-    lst_mod = mod_dao.select_mod_az
+    lst_mod = mod_dao.select_mod_az()
     return render_template("/vers/vers_form_create.html", msg="", display="none", lst_mod=lst_mod)
 
 @bp_vers.route("/vers_create", methods=["POST"])
@@ -23,11 +23,12 @@ def vers_create():
 
     mod_dao = ModeloDao()
     lst_mod = mod_dao.select_mod_az()
-    if vers.id_vers is None:
+
+    if not vers_dao.select_vers_id(vers.id_vers):
         msg = "Erro ao inserir versão."
     else:
         msg = f"Versão, {vers.nome_vers}, adicionada."
-    return render_template("/vers/vers_form_create.html", msg="", display="block", lst_mod=lst_mod)
+    return render_template("/vers/vers_form_create.html", msg=msg, display="block", lst_mod=lst_mod)
 
 @bp_vers.route("/vers_read")
 def vers_read():
@@ -92,9 +93,14 @@ def vers_dell(cod):
     vers_dao.dell_vers(cod)
 
     if not vers_dao.select_vers_id(cod):
-        msg += " | Versão excluída da database."
+        msg = "Versão excluída da database."
     else:
-        msg += " | Erro ao exluir versão."
+        msg = "Erro ao exluir versão."
+    lst = vers_dao.select_vers_az()
+    if not lst:
+        msg += " | Não há versões registradas na database."
+    else:
+        msg += f" | {len(lst)} versões registradas na database."
 
     lst = vers_dao.select_vers_az()
     

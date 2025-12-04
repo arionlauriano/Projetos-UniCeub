@@ -37,7 +37,7 @@ class CompraDao:
             return None
         
         sql="INSERT INTO compra (data_comp, cod_nf_comp, total_comp, cod_cli, cod_vers) VALUES (%s, %s, %s, %s, %s)"
-        valores=(comp.data_comp, comp.cod_nf_comp, comp.total_comp, comp.cod_cli, comp.cod_vers)
+        valores=[comp.data_comp, comp.cod_nf_comp, comp.total_comp, comp.cod_cli, comp.cod_vers]
         try:
             self.cursor.execute(sql, valores)
             self.conexao.commit()
@@ -154,28 +154,10 @@ if __name__=="__main__":
     comp_dao=CompraDao()
     
     if comp_dao.conexao:
-        comp1=Compra(data_comp="2001-01-01", cod_nf_comp="123", total_comp="456", cod_cli="2", cod_vers="3")
-        comp2=Compra(data_comp="2002-01-01", cod_nf_comp="1234", total_comp="4567", cod_cli="2", cod_vers="4")
+        comp1=Compra(data_comp="2001-01-01", cod_nf_comp="NF-00000000-000", total_comp="456", cod_cli="2", cod_vers="3")
+
 
         comp_dao.add_comp(comp1)
-        comp_dao.add_comp(comp2)
-
-        print("\n Teste select_cli_comp:")
-        for comp in comp_dao.select_comp_cli_az(2):
-            print(comp)
-
-        print("\n Teste select_vers_comp:")
-        for comp in comp_dao.select_comp_vers_az(4):
-            print(comp)
-
-        print("\n Teste select_comp_id:")
-        print(comp_dao.select_comp_id(1))
-
-        comp_dao.dell_comp(comp1.id_comp)
-
-        comp2.cod_nf_comp="testeUpdate"
-        comp_dao.update_comp(comp2)
-
-        print("\n Teste select_comp_az:")
         for comp in comp_dao.select_comp_az():
             print(comp)
+

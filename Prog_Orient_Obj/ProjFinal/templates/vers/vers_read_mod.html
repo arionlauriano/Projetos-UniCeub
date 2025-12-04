@@ -209,16 +209,14 @@
                         <th>Imagem</th>
                         <th>Versão</th>
                         <th>Valor</th>
-                        <th>Modelo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cli in lst %}
+                    {% for vers in lst %}
                     <tr>
                         <td><img src="{{vers.img_vers}}" alt="Sem Imagem."></td>
                         <td>{{vers.nome_vers}}</td>
                         <td>{{vers.vlr_vers}}</td>
-                        <td>{{vers.mod.nome_mod}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

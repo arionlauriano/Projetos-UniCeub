@@ -142,7 +142,7 @@
         <div class="form">
             <form action="/cli/cli_save_update" method="post">
                 <label for="id_cli">Identificador:</label><br>
-                <input type="text" value="{{cli.id_cli}}" readonly><br><br>
+                <input type="text" name="id_cli" id="id_cli" value="{{cli.id_cli}}" readonly><br><br>
                 <label for="nome_cli">Nome Completo:</label><br>
                 <input type="text" name="nome_cli" id="nome" value="{{cli.nome_cli}}" required><br><br>
                 <label for="data_nasc">Data de Nascimento:</label><br>

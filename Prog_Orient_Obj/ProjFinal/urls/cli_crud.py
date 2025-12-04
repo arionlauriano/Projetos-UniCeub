@@ -96,9 +96,13 @@ def cli_dell(cod):
     uf_dao = UFdao()
     lst_uf = uf_dao.select_uf_az()
     if not cli_dao.select_cli_id(cod):
-        msg += " | Cliente excluído da database."
+        msg = "Cliente excluído da database."
     else:
-        msg += " | Erro ao excluir cliente. Confira se há compras associadas."
+        msg = "Erro ao excluir cliente. Confira se há compras associadas."
+    if not lst:
+        msg += " | Não há clientes registrados na database."
+    else:
+        msg += f" | {len(lst)} clientes registrados na database."
     return render_template("/cli/cli_edit.html", msg=msg, lst=lst, lst_uf=lst_uf)
 
 @bp_cli.route("/cli_update/<int:cod>")

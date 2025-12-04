@@ -151,7 +151,7 @@
         <div class="form">
             <form action="/vers/vers_save_update" method="post">
                 <label for="id_vers">Identificador:<span>*</span></label><br>
-                <input type="text" value="{{vers.id_vers}}" readonly><br><br>
+                <input type="text" name="id_vers" id="id_vers" value="{{vers.id_vers}}" readonly><br><br>
                 <label for="nome_vers">Nome da Versão:<span>*</span></label><br>
                 <input type="text" name="nome_vers" id="nome_vers" value="{{vers.nome_vers}}" required><br><br>
                 <label for="data_nasc">Valor:<span>*</span></label><br>
@@ -163,7 +163,7 @@
                 <select name="cod_mod" id="cod_mod" required>
                     <option value="none">Selecione um Modelo:</option>
                     {% for mod in lst_mod %}
-                    <option value="{{ mod.id_mod }}">{{ mod.nome_mod }} - [ {{ mod.mont.slg_mont }} - {{ mod.mont.nome_montadora }} ]</option>
+                    <option value="{{ mod.id_mod }}">{{mod.nome_mod}} - [  {{mod.mont.sgl_mont}} - {{mod.mont.nome_mont}} ]</option>
                     {% endfor %}
                 </select><br><br>
                 <button type="submit">Salvar Atualização</button><br><br><br>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Versão</title>
+    <title>Adicionar Compra</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -142,7 +142,7 @@
     </style>
 </head>
 <body>
-    <h1>Nova Versão</h1>
+    <h1>Nova Compra</h1>
 
     <div class="outer">
         <div class="form">
@@ -150,7 +150,7 @@
                 <label for="data_comp">Data da Compra:<span>*</span></label><br>
                 <input type="text" name="data_comp" id="data_comp" placeholder="AAAA-MM-DD" required><br><br>
                 <label for="cod_nf">Código NF:<span>*</span></label><br>
-                <input type="text" name="cod_nf" id="cod_nf" placeholder="Código da Nota Fiscal" required><br><br>
+                <input type="text" name="cod_nf" id="cod_nf" placeholder="NF-00000000-000" required><br><br>
                 <label for="total_comp">Total da Compra:</label><br>
                 <input type="text" name="total_comp" id="total_comp" placeholder="000.00"><br><br>
                 <label for="cod_cli">Cliente:<span>*</span></label><br>
@@ -170,7 +170,7 @@
 
                 <button type="submit">Adicionar</button>
             </form><br>
-            <div class="msg" style="display: {{ display }};">{{ msm }}</div><br>
+            <div class="msg" style="display: {{ display }};">{{ msg }}</div><br>
             <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/comp/comp_read" class="redirect">Visualizar Compras</a></p>
         </div>
     </div>

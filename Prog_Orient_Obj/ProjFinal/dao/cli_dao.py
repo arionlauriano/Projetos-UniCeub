@@ -56,7 +56,7 @@ class ClienteDao:
             return f"Erro: {err}"
     
     def dell_cli(self, id_cli):
-        sql="DELETE FROM cliente WHERE id_mod=%s"
+        sql="DELETE FROM cliente WHERE id_cli=%s"
         try:
             self.cursor.execute(sql, [id_cli])
             self.conexao.commit()
@@ -124,30 +124,6 @@ if __name__ =="__main__":
     cli_dao=ClienteDao()
 
     if cli_dao.conexao:
-        cli1=Cliente(nome_cli="Teste Ad 1", data_nasc_cli="2001-01-01", cod_uf=7, cep_cli=123456781, end_cli="Começo do Mundo cento e abobrinha")
-        cli2=Cliente(nome_cli="Teste Ad 2", data_nasc_cli="2002-02-02", cod_uf=1, cep_cli="123456782", end_cli="Fim do Mundo 200 e abobrinha")
-
-        cli_dao.add_cli(cli1)
-        cli_dao.add_cli(cli2)
-        
-        print("\n Teste select_cli_az:")
-        for cli in cli_dao.select_cli_az():
-            print(cli)
-
-        print("\n Teste filter uf:")
-        for cli in cli_dao.select_cli_uf_az(16):
-            print(cli)
-
-        print("\n Teste filter id:")
-        print(cli_dao.select_cli_id(1))
-
-        cli1.nome_cli="Teste Update"
-        cli_dao.update_cli(cli1)
-
-        cli_dao.dell_cli(7)
-
-        print("\n Teste Dell e Update:")
-        for cli in cli_dao.select_cli_az():
-            print(cli)
+        cli_dao.dell_cli(6)
 
  

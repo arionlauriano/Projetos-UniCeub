@@ -27,13 +27,15 @@ def comp_create():
     comp_dao = CompraDao()
     comp_dao.add_comp(comp)
 
+
+
     vers_dao = VersaoDao()
     lst_vers = vers_dao.select_vers_az()
 
     cli_dao = ClienteDao()
     lst_cli = cli_dao.select_cli_az()
 
-    if comp.id_comp is None:
+    if not comp_dao.select_comp_id(comp.id_comp):
         msg = "Erro ao registrar compra."
     else:
         msg = f"Compra número {comp.id_comp} registrada."

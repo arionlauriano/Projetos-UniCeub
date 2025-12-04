@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Versão</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            background-color: rgb(188, 201, 212);
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            color: rgb(9, 62, 108);
+            font-weight: 800;
+        }
+
+        .outer {
+            text-align: center;
+            max-width: 1000px;
+            width: 70%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgb(121, 142, 161);
+            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.345);
+            border-radius: 10px;
+        }
+
+        .form {
+            flex: 1 1 300px;
+            padding: 20px;
+            width: 80%;
+            margin: auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            width: 80%;
+        }
+
+        label {
+            font-size: 20px;
+            margin-bottom: 0px;
+            color: rgb(32, 91, 142);
+            font-weight: 600;
+            width: 80%;
+        }
+
+        input {
+            height: 25px;
+            width: 55%;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: rgb(106, 132, 158);
+            outline: none;
+        }
+
+        button {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(0, 47, 88);
+            background-color: rgb(141, 189, 231);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 5px;
+        }
+
+        div.msg {
+            width: 90%;
+            padding: 10px;
+            border: solid;
+            border-color: rgb(213, 63, 63);
+            border-radius: 5px;
+            background-color: rgba(213, 63, 63, 0.222);
+            color: rgb(68, 1, 1);
+        }
+
+        a.redirect {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 47, 88, 0.8);
+            background-color: rgba(141, 189, 231, 0.580);
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+        }
+
+        a.redirect:hover {
+            box-shadow: 0 0 4px;
+        }
+        select.select {
+            height: 35px;
+            width: 55%;
+            font-size: 15px;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+
+        option {
+            height: 35px;
+            width: 55%;
+            font-size: 15px;
+            border-width: 3px;
+            border-radius: 8px;
+            border-color: rgb(32, 91, 142);
+            border-style: solid;
+            text-align: center;
+        }
+        span {
+            color: brown;
+        }
+        i {
+            color: rgb(96, 101, 104);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Atualização de Versão</h1>
+
+    <div class="outer">
+        <div class="form">
+            <form action="/comp/comp_save_update" method="post">
+                <label for="id_comp">Identificador:<span>*</span></label><br>
+                <input type="text" name="id_comp" id="id_comp" required readonly value="{{ comp.id_comp }}"><br><br>
+                <label for="data_comp">Data da Compra:<span>*</span></label><br>
+                <input type="text" name="data_comp" id="data_comp" value="{{ comp.data_comp}}" required><br><br>
+                <label for="cod_nf">Código NF:<span>*</span></label><br>
+                <input type="text" name="cod_nf" id="cod_nf" value="{{ comp.cod_nf_comp }}" required><br><br>
+                <label for="total_comp">Total da Compra:</label><br>
+                <input type="text" name="total_comp" id="total_comp" value="{{ comp.total_comp }}"><br><br>
+                <label for="cod_cli">Cliente:<span>*</span></label><br>
+                <select name="cod_cli" id="cod_cli" class="select" required>
+                    <option value="none">Selecione um Cliente:</option>
+                    {% for cli in lst_cli %}
+                    <option value="{{ cli.id_cli }}">{{ cli.id_cli }} - {{ cli.nome_cli }}</option>
+                    {% endfor %}
+                </select><br><br>
+                <label for="cod_vers">Versão:<span>*</span></label><br>
+                <select name="cod_vers" id="cod_vers"  class="select" required>
+                    <option value="none">Selecione uma Versão:</option>
+                    {% for vers in lst_vers %}
+                    <option value="{{ vers.id_vers }}">{{ vers.nome_vers }} - {{ vers.mod.nome_mod }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <button type="submit">Salvar Atualização</button>
+            </form><br>
+            <div class="msg" style="display: {{ display }};">{{ msm }}</div><br>
+            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/comp/comp_edit" class="redirect">Continuar Editando</a></p>
+        </div>
+    </div>
+</body>
+</html>
