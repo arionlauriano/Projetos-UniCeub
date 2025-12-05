@@ -13,7 +13,7 @@ app.register_blueprint(bp_comp, url_prefix="/comp")
 app.register_blueprint(bp_mod, url_prefix="/mod")
 app.register_blueprint(bp_mont, url_prefix="/mont")
 app.register_blueprint(bp_uf, url_prefix="/uf")
-app.register_blueprint(bp_vers, url_prefix="/vers")
+app.register_blueprint(bp_vers, url_prefix="/vers") 
 
 @app.route("/")
 def render_menu():

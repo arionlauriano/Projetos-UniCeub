@@ -21,7 +21,7 @@ def comp_create():
     comp.data_comp = request.form["data_comp"]
     comp.cod_nf_comp = request.form["cod_nf"]
     comp.total_comp = request.form["total_comp"]
-    comp.cod_cli = request.form["cod_cli"]
+    comp.cod_cli = request.form["cod_cli"] 
     comp.cod_vers = request.form["cod_vers"]
 
     comp_dao = CompraDao()
@@ -147,9 +147,13 @@ def comp_dell(cod):
     cli_dao = ClienteDao()
     lst_cli = cli_dao.select_cli_az()
     if not comp_dao.select_comp_id(cod):
-        msg += " | Compra excluída da database."
+        msg = "Compra excluída da database."
     else:
-        msg += " | Erro ao excluir copra."
+        msg = "Erro ao excluir copra."
+    if not lst:
+        msg += "| Não há compras registradas na database."
+    else:
+        msg += f" | {len(lst)} compras registradas na database"
     return render_template("/comp/comp_edit.html", msg=msg, lst=lst, lst_vers=lst_vers, lst_cli=lst_cli)
 
 @bp_comp.route("/comp_update/<int:cod>")
@@ -175,7 +179,7 @@ def comp_save_update():
     comp.cod_vers = request.form["cod_vers"]
 
     comp_dao = CompraDao()
-    comp_dao.add_comp(comp)
+    comp_dao.update_comp(comp)
 
     vers_dao = VersaoDao()
     lst_vers = vers_dao.select_vers_az()

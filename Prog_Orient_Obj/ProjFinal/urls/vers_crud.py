@@ -101,8 +101,6 @@ def vers_dell(cod):
         msg += " | Não há versões registradas na database."
     else:
         msg += f" | {len(lst)} versões registradas na database."
-
-    lst = vers_dao.select_vers_az()
     
     mod_dao = ModeloDao()
     lst_mod = mod_dao.select_mod_az()

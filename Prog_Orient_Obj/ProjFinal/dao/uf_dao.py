@@ -55,7 +55,7 @@ class UFdao:
         if not self.conexao:
             return False
         
-        sql = "DELETE uf WHERE id_uf=%s"
+        sql = "DELETE FROM uf WHERE id_uf=%s"
         try:
             self.cursor.execute(sql, [id_uf])
             self.conexao.commit()
@@ -100,27 +100,5 @@ if __name__ == "__main__":
     uf_dao = UFdao()
 
     if uf_dao.conexao:
-        print("\n Lista de Estados:")
-        for uf in uf_dao.select_uf_az():
-            print(uf)
 
-        print("\n Teste Select por ID: DF")
-        print(uf_dao.select_uf_id(7))
-
-        uf1 = UF(sgl_uf="SV", nome_uf="Samba da Virgínia")
-        uf2 = UF(sgl_uf="TP", nome_uf="topezeira")
-        uf_dao.add_uf(uf1)
-        uf_dao.add_uf(uf2)
-
-        print("\n Teste Adds:")
-        for uf in uf_dao.select_uf_az():
-            print(uf)
-
-        uf_dao.dell_uf(3)
-
-        uf2.nome_uf="Teste deu Certo"
-        uf_dao.update_uf(uf2)
-
-        print("\n Teste Dell e Update:")
-        for uf in uf_dao.select_uf_az():
-            print(uf) 
+        uf_dao.dell_uf(28)

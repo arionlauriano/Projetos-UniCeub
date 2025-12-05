@@ -52,7 +52,7 @@ def uf_edit():
     return render_template("uf/uf_edit.html", msg=msg, lst=lst)
 
 
-@bp_uf.route("/uf_delete/<int:cod>")
+@bp_uf.route("/uf_dell/<int:cod>")
 def uf_delete(cod):
     uf_dao = UFdao()
     uf_dao.dell_uf(cod)

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Versão</title>
+    <title>Adicionar Modelo</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -111,7 +111,7 @@
         a.redirect:hover {
             box-shadow: 0 0 4px;
         }
-        select.select {
+        select#cod_mod {
             height: 35px;
             width: 55%;
             font-size: 15px;
@@ -142,38 +142,25 @@
     </style>
 </head>
 <body>
-    <h1>Atualização de Versão</h1>
+    <h1>Nova Versão</h1>
 
     <div class="outer">
         <div class="form">
-            <form action="/comp/comp_save_update" method="post">
-                <label for="id_comp">Identificador:<span>*</span></label><br>
-                <input type="text" name="id_comp" id="id_comp" required readonly value="{{ comp.id_comp }}"><br><br>
-                <label for="data_comp">Data da Compra:<span>*</span></label><br>
-                <input type="text" name="data_comp" id="data_comp" value="{{ comp.data_comp}}" required><br><br>
-                <label for="cod_nf">Código NF:<span>*</span></label><br>
-                <input type="text" name="cod_nf" id="cod_nf" value="{{ comp.cod_nf_comp }}" required><br><br>
-                <label for="total_comp">Total da Compra:</label><br>
-                <input type="text" name="total_comp" id="total_comp" value="{{ comp.total_comp }}"><br><br>
-                <label for="cod_cli">Cliente:<span>*</span></label><br>
-                <select name="cod_cli" id="cod_cli" class="select" required>
-                    <option value="none">Selecione um Cliente:</option>
-                    {% for cli in lst_cli %}
-                    <option value="{{ cli.id_cli }}">{{ cli.id_cli }} - {{ cli.nome_cli }}</option>
-                    {% endfor %}
-                </select><br><br>
-                <label for="cod_vers">Versão:<span>*</span></label><br>
-                <select name="cod_vers" id="cod_vers"  class="select" required>
-                    <option value="none">Selecione uma Versão:</option>
-                    {% for vers in lst_vers %}
-                    <option value="{{ vers.id_vers }}">{{ vers.nome_vers }} - {{ vers.mod.nome_mod }}</option>
+            <form action="/mod/mod_create" method="post">
+                <label for="nome_mod">Nome:<span>*</span></label><br>
+                <input type="text" name="nome_mod" id="nome" placeholder="Nome do Modelo" required><br><br>
+                <label for="cod_mont">Montadora:<span>*</span></label><br>
+                <select name="cod_mont" id="cod_mod" required>
+                    <option value="none">Selecione uma Montadora</option>
+                    {% for mont in lst_mont %}
+                    <option value="{{ mont.id_mont }}">{{mont.sgl_mont}} - {{mont.nome_mont}}</option>
                     {% endfor %}
                 </select><br><br>
 
-                <button type="submit">Salvar Atualização</button>
+                <button type="submit">Adicionar</button>
             </form><br>
             <div class="msg" style="display: {{ display }};">{{ msg }}</div><br>
-            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/comp/comp_edit" class="redirect">Continuar Editando</a></p>
+            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/mod/mod_read" class="redirect">Visualizar Modelos</a></p>
         </div>
     </div>
 </body>

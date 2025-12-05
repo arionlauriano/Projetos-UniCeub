@@ -1,0 +1,39 @@
+import mysql.connector
+import openpyxl
+
+import mysql.connector
+from mysql.connector import Error
+
+def create_db_connection(host_name, user_name, user_password, db_name=None):
+   
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            passwd="Arlarl12#",
+            database="db_auto"  
+        )
+        if connection.is_connected():
+            print("✅ MySQL Database connection successful")
+            # 
+    except Error as err:
+        print(f"❌ Error: '{err}'")
+
+    return connection
+
+
+DB_HOST = "localhost"
+DB_USER = "your_username" 
+DB_PASSWORD = "your_password"
+DB_NAME = "your_database_name"
+
+
+db_connection = create_db_connection(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+
+
+if db_connection is not None and db_connection.is_connected():
+   
+    print("Connection object is ready to use.")
+    db_connection.close()
+    print("Connection closed.")

@@ -1,7 +1,6 @@
 import mysql.connector
 from dao.vers_dao import Versao, VersaoDao
 from dao.cli_dao import Cliente, ClienteDao
-from dao.uf_dao import UF, UFdao
 
 class Compra:
     def __init__(self, id_comp=None, data_comp="", cod_nf_comp="", total_comp="", cod_cli=None, cod_vers=None, cli=None, vers=None):
@@ -41,6 +40,7 @@ class CompraDao:
         try:
             self.cursor.execute(sql, valores)
             self.conexao.commit()
+            comp.id_comp = self.cursor.lastrowid
         except mysql.connector.Error as err:
             return f"Erro: {err}"
     
@@ -48,7 +48,7 @@ class CompraDao:
         if not self.conexao:
             return None
         
-        sql="UPDATE comp SET data_comp=%s, cod_nf_comp=%s, total_comp=%s, cod_cli=%s, cod_vers=%s WHERE id_comp=%s"
+        sql="UPDATE compra SET data_comp=%s, cod_nf_comp=%s, total_comp=%s, cod_cli=%s, cod_vers=%s WHERE id_comp=%s"
         valores=(comp.data_comp, comp.cod_nf_comp, comp.total_comp, comp.cod_cli, comp.cod_vers, comp.id_comp)
         try:
             self.cursor.execute(sql, valores)
@@ -158,6 +158,5 @@ if __name__=="__main__":
 
 
         comp_dao.add_comp(comp1)
-        for comp in comp_dao.select_comp_az():
-            print(comp)
+        comp_dao.select_comp_id(comp1.id_comp)
 

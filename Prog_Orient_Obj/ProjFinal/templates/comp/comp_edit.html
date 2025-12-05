@@ -297,7 +297,7 @@
                         <td>{{comp.total_comp}}</td>
                         <td>{{comp.cli.id_cli}} - {{comp.cli.nome_cli}}</td>
                         <td>{{comp.vers.mod.nome_mod}} - {{comp.vers.nome_vers}}</td>
-                        <td><a href="/comp/comp_dell/{{ comp.id_comp }}" class="dell" onclick="return confirm('Deseja excluir a versão, {{vers.nome_vers}}, da database?')">Excluir</a>
+                        <td><a href="/comp/comp_dell/{{ comp.id_comp }}" class="dell" onclick="return confirm('Deseja excluir a compra número {{comp.id_comp}}, da database?')">Excluir</a>
                         <a href="/comp/comp_update/{{ comp.id_comp }}" class="edit">Alterar</a></td>
                     </tr>
                     {% endfor %}

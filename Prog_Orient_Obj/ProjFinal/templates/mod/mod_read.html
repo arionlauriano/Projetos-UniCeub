@@ -4,7 +4,7 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edição de Versões</title>
+    <title>Lista de Modelos</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -35,7 +35,7 @@
         .outer {
             text-align: center;
             max-width: 1000px;
-            width: 85%;
+            width: 70%;
             margin: auto;
             padding: 20px;
             background-color: rgb(121, 142, 161);
@@ -116,7 +116,7 @@
             background-color: rgb(127, 174, 215);
         }
 
-        select#cod_mod {
+        select#cod_mont {
             height: 35px;
             width: 55%;
             font-size: 15px;
@@ -196,53 +196,21 @@
         img {
             width: 50px;
         }
-        a.dell {
-            text-decoration: none;
-            font-size: 15px;
-            color: rgb(250, 253, 255);
-            background-color: rgb(182, 50, 50);
-            border-radius: 5px;
-            border: none;
-            padding: 8px;
-            transition: 0.5s;
-            display: block;
-        }
-
-        a.dell:hover {
-            box-shadow: 0 0 5px rgb(136, 32, 32);
-        }
-
-        a.edit {
-            text-decoration: none;
-            font-size: 15px;
-            color: rgb(250, 253, 255);
-            background-color: rgb(5, 84, 134);
-            border-radius: 5px;
-            border: none;
-            padding: 8px;
-            transition: 0.5s;
-            display: block;
-            margin-top: 3px;
-        }
-
-        a.edit:hover {
-            box-shadow: 0 0 5px rgb(1, 89, 144);
-        }
     </style>
 </head>
 
 <body>
-    <h1>Editar Versões</h1>
+    <h1>Lista de Modelos</h1>
     <div class="outer">
         <div class="filter">
             <h2>Filtrar</h2>
             <hr class="card-line">
-            <form action="/vers/vers_edit_mod" method="post">
-                <label for="cod_mod">Modelo:</label><br>
-                <select name="cod_mod" id="cod_mod" required>
-                    <option value="none">Selecione um Modelo:</option>
-                    {% for mod in lst_mod %}
-                    <option value="{{ mod.id_mod }}">{{mod.nome_mod}} - [  {{mod.mont.sgl_mont}} - {{mod.mont.nome_mont}} ]</option>
+            <form action="/mod/mod_read_mont" method="post">
+                <label for="cod_mont">Montadora:</label><br>
+                <select name="cod_mont" id="cod_mont" required>
+                    <option value="none">Selecione uma Montadora</option>
+                    {% for mont in lst_mont %}
+                    <option value="{{ mont.id_mont }}">{{mont.sgl_mont}} - {{mont.nome_mont}}</option>
                     {% endfor %}
                 </select><br><br>
                 <button type="submit">Filtrar</button>
@@ -252,30 +220,25 @@
         <div class="table">
             <table>
                 <thead>
-                    <tr>
-                        <th>Imagem</th>
+                   <tr>
+                        <th>Identificador</th>
+                        <th>Montadora</th>
                         <th>Modelo</th>
-                        <th>Versão</th>
-                        <th>Valor</th>
-                        <th>Edição</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for vers in lst %}
+                    {% for mod in lst %}
                     <tr>
-                        <td><img src="{{vers.img_vers}}" alt="Sem Imagem."></td>
-                        <td>[ {{vers.mod.mont.sgl_mont}} - {{vers.mod.mont.nome_mont}} ] - {{vers.mod.nome_mod}}</td>
-                        <td>{{vers.nome_vers}}</td>
-                        <td>{{vers.vlr_vers}}</td>
-                        <td><a href="/vers/vers_dell/{{ vers.id_vers }}" class="dell" onclick="return confirm('Deseja excluir a versão, {{vers.nome_vers}}, da database?')">Excluir</a>
-                        <a href="/vers/vers_update/{{ vers.id_vers }}" class="edit">Alterar</a></td>
+                        <td>{{mod.id_mod}}</td>
+                        <td>{{mod.mont.sgl_mont}} - {{mod.mont.nome_mont}}</td>
+                        <td>{{mod.nome_mod}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <br><br>
             <div class="msg">{{msg}}</div> <br>
-            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/vers/vers_form_create" class="redirect">Adicionar Versão</a></p>
+            <p><a href="/" class="redirect">Voltar ao Menu</a> ou <a href="/mod/mod_edit" class="redirect">Editar Modelos</a></p>
         </div>
     </div>
 </body>
