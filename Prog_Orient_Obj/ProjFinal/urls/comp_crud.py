@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, send_file
 from dao.comp_dao import Compra, CompraDao
 from dao.cli_dao import ClienteDao
 from dao.vers_dao import VersaoDao
+from dao.exel import gerar_relatorio
 
 bp_comp = Blueprint("comp", __name__)
 
@@ -189,3 +190,17 @@ def comp_save_update():
 
     msg = f"Compra número {comp.id_comp}, atualizada."
     return render_template("/comp/comp_update.html", comp=comp, msg=msg, display="block", lst_cli=lst_cli, lst_vers=lst_vers)
+
+@bp_comp.route("/comp_relatorio")
+def comp_relatorio():
+    resp = gerar_relatorio()
+    if resp[0]=="":
+        #retornar arquivo
+        return send_file(
+            resp[1],
+            as_attachment=True,
+            download_name='relatorio de vendas.xlsx' 
+        ) 
+    else: 
+        #retornar erro
+        return render_template("menu.html")
