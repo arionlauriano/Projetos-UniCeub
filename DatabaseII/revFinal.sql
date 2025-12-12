@@ -459,3 +459,208 @@ WHERE numero_ped IN ( SELECT numero
 
 --    3   --
 ROLLBACK;
+
+
+
+
+----------EXDERCÍCIO DE DD - ACESSO DE METADADOS----------
+--    1   --
+SELECT  table_name AS TABELA
+FROM    user_tables;
+
+--    2   --
+SELECT  table_name    AS TABELA,
+        column_name   AS COLUNA,
+        data_type     AS TIPO_DADO,
+        data_length
+FROM    user_tab_columns
+  ORDER BY tabela, column_name ASC;
+  
+--    3   --
+SELECT  owner             AS DONO,
+        constraint_name   AS CONSTRAINT,
+        constraint_type   AS TIPO,
+        search_condition  AS REGRA
+FROM user_constraints
+  ORDER BY 2 DESC, 3;
+  
+--    4   --
+SELECT  owner             AS DONO,
+        constraint_name   AS CONSTRAINT,
+        table_name        AS TABELA,
+        column_name       AS COLUNA,
+        position          AS POSICAO
+FROM user_cons_columns
+  ORDER BY 2 ASC,4 ASC;
+
+
+
+
+----------EXERCÍCIO DE DML - SELECT - JOIN - PARTE 1----------
+--    1   --
+SELECT  matricula, nome
+FROM    vendedor
+  ORDER BY nome DESC;
+  
+--    2   --
+SELECT DISTINCT nome    AS CLIENTE,
+                cnpj,
+                cidade
+FROM cliente
+  INNER JOIN pj ON cliente.codigo = pj.codigo_cli
+  ORDER BY  nome ASC,
+            cidade DESC;
+            
+--    2   --
+SELECT  nome                        AS VENDEDOR,
+        numero                      AS PEDIDO,
+        TO_CHAR(data,'DD/MM/YYYY')  AS DATA
+FROM    vendedor
+  INNER JOIN pedido p
+    ON vendedor.matricula = p.matricula_ven
+  WHERE total_fatura BETWEEN 1000.00 AND 500.00
+  ORDER BY nome DESC, data ASC;
+
+
+
+
+----------EXERCÍCIO DE DML - JOIN E VIEW - PARTE 1----------
+--    1   --
+SELECT  constraint_name   AS CONSTRAINT,
+        constraint_type   AS TIPO,
+        search_condition AS CONDICAO
+FROM user_constraints
+  WHERE table_name = 'item_produto'
+  ORDER BY 1;
+  
+--    2   --
+CREATE OR REPLACE VIEW view_cliente AS
+SELECT CASE 
+  WHEN cnpj IS NULL 
+    THEN 'pf'
+    ELSE 'pj'
+  END     AS TIPO,
+  codigo  AS CODIGO,
+  nome    AS CLIENTE,
+  cnpf,
+  cnpj
+FROM cliente LEFT JOIN
+  pf ON cliente.codigo = pf.codigo_cli LEFT JOIN
+  pj ON cliente.codigo = pj.codigo_cli 
+WHERE (cnpf IS NULL AND cnpj IS NOT NULL) 
+  OR  (cnpj IS NULL AND cnpf IS NOT NULL);
+  
+----------EXERCÍCIO DE DML - MÉDIO - JOIN - PARTE 2----------
+--    1   --
+SELECT TABLE_NAME AS TABELA
+FROM USER_TABLES
+ORDER BY TABELA;
+
+--    2   --
+SELECT NUMERO AS PEDIDO,
+DATA,
+TOTAL_FATURA AS TOTAL
+FROM PEDIDO
+WHERE TOTAL_FATURA > 2000.00
+ORDER BY DATA DESC;
+
+--    3   --
+SELECT NOME AS CLIENTE,
+NUMERO AS PEDIDO,
+DATA,
+TOTAL_FATURA AS TOTAL
+FROM PEDIDO JOIN
+CLIENTE ON PEDIDO.CODIGO_CLI = CLIENTE.CODIGO
+WHERE TOTAL_FATURA > 2000.00
+ORDER BY NOME;
+
+
+
+
+----------EXERCÍCIOS DE DML - DIFÍCIL - JOIN - PARTE 1----------
+CREATE OR REPLACE VIEW VIEW_ESTOQUE
+AS
+SELECT PRODUTO.DESCRICAO AS PRODUTO,
+A.QUANTIDADE_ENT AS QUANTIDADE_ADQUIRIDA,
+CASE
+  WHEN A.QUANTIDADE_ENT - NVL(B.QUANTIDADE_SAI,0) < 0
+    THEN NVL(A.QUANTIDADE_ENT,0)
+  ELSE NVL(B.QUANTIDADE_SAI,0)
+END AS QUANTIDADE_SAIDA,
+CASE
+  WHEN A.QUANTIDADE_ENT - NVL(B.QUANTIDADE_SAI,0) >= 0
+    THEN A.QUANTIDADE_ENT - NVL(B.QUANTIDADE_SAI,0)
+  ELSE 0
+END AS DISPONIVEL,
+PRODUTO.UNID_MEDIDA
+FROM PRODUTO LEFT JOIN
+(
+  SELECT CODIGO_PRO,
+  SUM(QUANTIDADE) AS QUANTIDADE_ENT
+  FROM ESTOQUE
+  GROUP BY CODIGO_PRO
+) A ON PRODUTO.CODIGO=A.CODIGO_PRO LEFT JOIN
+(
+  SELECT CODIGO_PRO,
+  SUM(QUANTIDADE) AS QUANTIDADE_SAI
+  FROM ITEM_PRODUTO
+  GROUP BY CODIGO_PRO
+) B ON B.CODIGO_PRO=PRODUTO.CODIGO;
+
+
+
+
+----------TRIGGER - PARTE 1----------
+DROP TABLE log_alteracoes ;
+CREATE TABLE log_alteracoes
+(
+id_log NUMBER CONSTRAINT log_alteracoes_PK PRIMARY KEY,
+acao VARCHAR2(12) NOT NULL,
+tabela VARCHAR2(30) NOT NULL,
+data_evento DATE NOT NULL
+);
+
+-- CRIAÇÃO DA SEQUENCE
+DROP SEQUENCE seq_id_log_alteracoes;
+CREATE SEQUENCE seq_id_log_alteracoes START WITH 1 INCREMENT BY 1;
+
+-- CRIAÇÃO DA TRIGGER
+DROP TRIGGER trg_log_altr_bi;
+CREATE OR REPLACE TRIGGER trg_log_altr_bi
+BEFORE INSERT ON log_alteracoes
+FOR EACH ROW
+BEGIN
+IF :NEW.id_log IS NOT NULL THEN
+RAISE_APPLICATION_ERROR(-20001, 'Não é permitido inserir manualmente o ID');
+ELSE
+SELECT seq_id_log_alteracoes.NEXTVAL INTO :NEW.id_log FROM dual;
+END IF;
+END;
+
+
+
+
+----------TRIGGER - PARTE 2----------
+CREATE OR REPLACE TRIGGER disp_item_produto
+BEFORE INSERT ON item_produto
+FOR EACH ROW
+DECLARE
+    v_total_vendido item_produto.quantidade%TYPE;
+    v_total_estoque estoque.quantidade%TYPE;
+BEGIN
+    SELECT NVL(SUM(quantidade), 0)
+    INTO v_total_vendido
+    FROM item_produto
+    WHERE codigo_pro = :NEW.codigo_pro;
+
+    SELECT NVL(SUM(quantidade), 0)
+    INTO v_total_estoque
+    FROM estoque
+    WHERE codigo_pro = :NEW.codigo_pro;
+    
+    IF (:NEW.quantidade + v_total_vendido) > v_total_estoque THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Não há disponibilidade. A quantidade total em pedidos (' || 
+                                           (:NEW.quantidade + v_total_vendido) || ') excede o estoque (' || 
+                                           v_total_estoque || ').');
+    END IF;
+END;
